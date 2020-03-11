@@ -109,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.           ,-----------------------------------------------------.
       RGB_VAD,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,    KC_7,    KC_8,    KC_9,    KC_0, RGB_VAI,\
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
-     RGB_RMOD,  KC_TAB,  FN_RK1,  KC_EQL, KC_UNDS, KC_BSLS,             KC_SLSH, KC_MINS, KC_PLUS, KC_QUES, KC_BSPC, RGB_MOD,\
+     RGB_RMOD,  KC_TAB,  FN_RK1,  KC_EQL, KC_UNDS, KC_MINS,             KC_SLSH, KC_BSLS, KC_PLUS, KC_QUES, KC_BSPC, RGB_MOD,\
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
       RGB_TOG,  KC_ESC, KC_LCBR, KC_LBRC, KC_LPRN,   KC_LT,              FN_RK2, KC_PIPE,  KC_TILD, KC_GRV,  KC_ENT, RGB_TOG, \
   //|--------+--------+--------+--------+--------+--------|           |--------+--------+--------+--------|--------|--------|
