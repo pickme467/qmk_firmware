@@ -1,0 +1,7 @@
+#pragma once
+
+#define PERMISSIVE_HOLD
+#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_TERM 50
+#define TAPPING_FORCE_HOLD
+#define RETRO_TAPPING
