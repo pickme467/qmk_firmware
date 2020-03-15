@@ -1,34 +1,95 @@
 #include QMK_KEYBOARD_H
 
-#define FN_1 LT(1, KC_QUOTE)
-#define FN_2 LT(1, KC_COMMA)
-#define FN_3 LT(1, KC_DOT)
-#define FN_4 LT(1, KC_SCOLON)
-#define FN_5 MO(2)
-#define FN_L LT(1, KC_L)
-#define FN_R LT(1, KC_R)
-#define FN_C LT(1, KC_C)
+enum {
+      MAIN = 0,
+      CURSORS,
+      NUMBERS,
+      BRACES,
+      FUNCTIONS,
+};
+
+enum {
+      UPPER_LOWER_MOD = 0,
+};
+
+void layer_reset(void) {
+  layer_off(CURSORS);
+  layer_off(NUMBERS);
+  layer_off(BRACES);
+  layer_off(FUNCTIONS);
+}
+
+void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
+  if (state->pressed) {
+    switch (state->count) {
+    case 1:
+      layer_on(NUMBERS);
+      break;
+    case 2:
+      layer_on(CURSORS);
+      break;
+    default:
+      layer_on(FUNCTIONS);
+       break;
+    }
+  } else {
+    layer_reset();
+    if (state->count == 2) {
+      register_code(KC_X);
+      unregister_code(KC_X);
+    }
+  }
+}
+
+void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
+  layer_reset();
+}
+
+qk_tap_dance_action_t tap_dance_actions[] =
+  {
+   [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_function, upper_lower_reset, 275)
+  };
+
+#define FN_X TD(UPPER_LOWER_MOD)
+#define FN_U MT(MOD_RALT, KC_U)
+#define FN_M MO(BRACES)
+#define FN_MUTE KC__MUTE
+#define FN_VOLU KC__VOLUP
+#define FN_VOLD KC__VOLDOWN
+#define FN_QUOT MT(MOD_LSFT, KC_QUOT)
+#define FN_SCLN MT(MOD_LCTL, KC_SCLN)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [0] = LAYOUT_ortho_3x10(
-    FN_1,    FN_2,    FN_3,    KC_P,    KC_Y,    KC_F,    KC_G,    FN_C,    FN_R,    FN_L,
-    KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,
-    FN_4,    KC_Q,    KC_J,    KC_K,    KC_X,  KC_SPC,    KC_M,    KC_W,    KC_V,    KC_Z
+  [MAIN] = LAYOUT_ortho_3x10(
+    FN_QUOT,   KC_COMM,    KC_DOT,      KC_P,      KC_Y,      KC_F,      KC_G,      KC_C,      KC_R,      KC_L,
+       KC_A,      KC_O,      KC_E,      FN_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
+    FN_SCLN,      KC_Q,      KC_J,      KC_K,      FN_X,    KC_SPC,      KC_M,      KC_W,      KC_V,      KC_Z
   ),
 
-  [1] = LAYOUT_ortho_3x10(
-     KC_ESC, KC_CAPS, KC_MINS, KC_NUHS,  KC_GRV, KC_SLSH,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSPC,
-     KC_TAB, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, KC_LEFT,   KC_UP, KC_DOWN, KC_RIGHT,  KC_ENT,
-    KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,    FN_5,    KC_B, KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT
+  [CURSORS] = LAYOUT_ortho_3x10(
+    KC_EXLM,     KC_AT,   KC_HASH,    KC_DLR,   KC_PERC,   KC_CIRC,   KC_AMPR,   KC_ASTR,    XXXXXXX,   KC_CLCK,
+    KC_HOME, KC_PGDOWN,   KC_PGUP,    KC_END,   KC_COMM,    KC_DOT,   KC_LEFT,     KC_UP,    KC_DOWN,  KC_RIGHT,
+    KC_LSFT,   KC_LALT,   KC_LCTL,    KC_LGUI,  XXXXXXX,   XXXXXXX,   KC_RGUI,   KC_RCTL,    KC_LALT,   KC_RSFT
   ),
 
-  [2] = LAYOUT_ortho_3x10(
-       KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
-     KC_DEL,  KC_INS, KC_MINS, KC_NUHS,  KC_GRV, KC_SLSH,  KC_EQL, KC_LBRC, KC_RBRC,   RESET,
-    KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,  KC_SPC, KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT
+  [NUMBERS] = LAYOUT_ortho_3x10(
+       KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
+     KC_TAB,    KC_INS,    KC_EQL,   KC_UNDS,   KC_MINS,   KC_SLSH,   KC_BSLS,   KC_PLUS,   KC_QUES,   KC_BSPC,
+     KC_ESC,   KC_LCBR,   KC_LBRC,      KC_X,   XXXXXXX,      KC_B,      FN_M,   KC_TILD,    KC_GRV,    KC_ENT
   ),
 
+  [BRACES] = LAYOUT_ortho_3x10(
+    XXXXXXX,   KC_RCBR,   KC_RBRC,   KC_RPRN,     KC_GT,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+     KC_TAB,   KC_LCBR,   KC_LBRC,   KC_LPRN,     KC_LT,   XXXXXXX,   KC_PIPE,   XXXXXXX,   XXXXXXX, KC_DELETE,
+    KC_LSFT,   KC_LALT,   KC_LCTL,   KC_LGUI,   XXXXXXX,      KC_B,   KC_RGUI,   KC_RCTL,   KC_LALT,   KC_RSFT
+  ),
+
+  [FUNCTIONS] = LAYOUT_ortho_3x10(
+      KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
+      RESET,   KC_SLCK,   FN_MUTE,   FN_VOLD,    KC_F11,    KC_F12,   FN_VOLU,   KC_VOLU,   KC_VOLD,   KC_MUTE,
+     KC_ESC,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,      KC_B,   XXXXXXX,   XXXXXXX,   XXXXXXX,    KC_ENT
+  ),
 };
 
 void keyboard_pre_init_user(void) {
