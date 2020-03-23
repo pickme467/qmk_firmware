@@ -111,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
      RGB_RMOD,  KC_TAB, XXXXXXX,  KC_EQL, KC_UNDS, KC_MINS,             KC_SLSH, KC_BSLS, KC_PLUS, KC_QUES, KC_BSPC, RGB_MOD,\
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
-      RGB_TOG,  KC_ESC, KC_LCBR, KC_LBRC, KC_LPRN,   KC_LT,              FN_RK2, KC_PIPE,  KC_TILD, KC_GRV,  KC_ENT, RGB_TOG,\
+      RGB_TOG,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             KC_PIPE,  FN_RK2,  KC_TILD, KC_GRV,  KC_ENT, RGB_TOG,\
   //|--------+--------+--------+--------+--------+--------|           |--------+--------+--------+--------|--------|--------|
                                  KC_LALT, KC_LGUI, XXXXXXX,             XXXXXXX, KC_RSFT, KC_LGUI\
                              //`--------------------------'           `--------------------------'
@@ -131,11 +131,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BRACES] = LAYOUT( \
   //,-----------------------------------------------------.           ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, KC_RCBR, KC_RBRC, KC_RPRN,   KC_GT,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
-      XXXXXXX, XXXXXXX, KC_LCBR, KC_LBRC, KC_LPRN,   KC_LT,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_LT,   KC_GT,             XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
-      XXXXXXX, XXXXXXX, KC_RCBR, KC_RBRC, KC_RPRN,   KC_GT,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
                                  KC_LALT, KC_LGUI, _______,    _______, KC_LALT, KC_LGUI\
                              //`--------------------------'  `--------------------------'
