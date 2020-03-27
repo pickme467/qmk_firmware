@@ -15,7 +15,6 @@ enum {
 void layer_reset(void) {
   layer_off(CURSORS);
   layer_off(NUMBERS);
-  layer_off(BRACES);
   layer_off(FUNCTIONS);
 }
 
@@ -67,6 +66,7 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FN_X TD(UPPER_LOWER_MOD)
 #define FN_B KC_SPC
 
+#define FNN_J MO(BRACES)
 #define FNN_M MO(BRACES)
 #define FN_SPC KC_B
 
@@ -87,13 +87,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUMBERS] = LAYOUT_ortho_3x10(
        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
      KC_TAB,   XXXXXXX,    KC_EQL,   KC_UNDS,   KC_MINS,   KC_SLSH,   KC_BSLS,   KC_PLUS,   KC_QUES,   KC_BSPC,
-     KC_ESC,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,    FN_SPC,      FNN_M,   KC_TILD,    KC_GRV,    KC_ENT
+     KC_ESC,   XXXXXXX,     FNN_J,      KC_X,   XXXXXXX,    FN_SPC,      FNN_M,   KC_TILD,    KC_GRV,    KC_ENT
   ),
 
   [BRACES] = LAYOUT_ortho_3x10(
     XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LBRC,   KC_RBRC,    KC_INS,
      KC_TAB,   XXXXXXX,   XXXXXXX,     KC_LT,     KC_GT,   XXXXXXX,   XXXXXXX,   KC_LPRN,   KC_RPRN, KC_DELETE,
-    KC_LSFT,   KC_LALT,   KC_LCTL,   KC_LGUI,   XXXXXXX,    FN_SPC,   XXXXXXX,   KC_LCBR,   KC_RCBR,   KC_PIPE
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,    FN_SPC,   XXXXXXX,   KC_LCBR,   KC_RCBR,   KC_PIPE
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(

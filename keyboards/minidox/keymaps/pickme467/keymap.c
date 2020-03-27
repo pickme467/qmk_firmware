@@ -15,7 +15,6 @@ void layer_reset(void) {
   layer_off(_LOWER);
   layer_off(_RAISE);
   layer_off(_ADJUST);
-  layer_off(_BRACES);
 }
 
 void lower_upper_finish(qk_tap_dance_state_t* state, void* user_data) {
@@ -101,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, XXXXXXX, XXXXXXX, KC_LGUI, XXXXXXX,                       FN_LK1,  FN_LK4, KC_RSFT, KC_RCTL,  KC_ENT,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LALT, KC_LCTL, XXXXXXX,    XXXXXXX, KC_LALT,  KC_LGUI\
+                                 KC_LSFT, KC_LCTL, XXXXXXX,    XXXXXXX, KC_RCTL, KC_RGUI\
                              //`--------------------------'  `--------------------------'
     ),
 
@@ -111,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        KC_TAB, XXXXXXX,  KC_EQL, KC_UNDS, KC_MINS,                      KC_SLSH, KC_BSLS, KC_PLUS, KC_QUES, KC_BSPC,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-       KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_PIPE,  FN_RK2, KC_TILD,  KC_GRV,  KC_ENT,\
+       KC_ESC, XXXXXXX,  FN_RK2, XXXXXXX, XXXXXXX,                      KC_PIPE,  FN_RK2, KC_TILD,  KC_GRV,  KC_ENT,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_RSFT, KC_LGUI\
+                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_RGUI,  FN_RK2\
                              //`--------------------------'  `--------------------------'
   ),
 
@@ -125,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         RESET, KC_SLCK, XXXXXXX, XXXXXXX,  FN_AK1,                       FN_AK2,  FN_AK3, KC_MUTE, KC_VOLD, KC_VOLU,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LALT, KC_LGUI, _______,    _______, KC_LALT, KC_LGUI\
+                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_LALT, KC_LGUI\
                              //`--------------------------'  `--------------------------'
  ),
 
@@ -137,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LALT, KC_LGUI, _______,    _______, KC_LALT, KC_LGUI\
+                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_LALT, KC_LGUI\
                              //`--------------------------'  `--------------------------'
   )
 };
