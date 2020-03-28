@@ -5,6 +5,7 @@
 #define _RAISE 2
 #define _ADJUST 3
 #define _BRACES 4
+#define _RALT 5
 
 enum {
       LOWER_UPPER_MOD = 0,
@@ -77,6 +78,17 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FN_AK1 KC__MUTE
 #define FN_AK2 KC__VOLDOWN
 #define FN_AK3 KC__VOLUP
+#define FN_RALT MO(_RALT)
+#define FNRA_A RALT(KC_A)
+#define FNRA_C RALT(KC_C)
+#define FNRA_E RALT(KC_E)
+#define FNRA_L RALT(KC_L)
+#define FNRA_N RALT(KC_N)
+#define FNRA_O RALT(KC_O)
+#define FNRA_S RALT(KC_S)
+#define FNRA_X RALT(KC_X)
+#define FNRA_Z RALT(KC_Z)
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVORAK] = LAYOUT( \
@@ -87,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
       RGB_SAD, KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, RGB_SAI,\
   //|--------+--------+--------+--------+--------+--------|           |--------+--------+--------+--------|--------|--------|
-                                 KC_RALT, KC_LCTL,  FN_DK3,              FN_DK4,  KC_SPC, KC_RSFT\
+                                 FN_RALT, KC_LCTL,  FN_DK3,              FN_DK4,  KC_SPC, KC_RSFT\
                              //`--------------------------'  `        `--------------------------'
 
   ),
@@ -138,6 +150,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
                                  KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_LALT, KC_LGUI\
                              //`--------------------------'  `--------------------------'
+  ),
+
+  [_RALT] = LAYOUT( \
+  //,-----------------------------------------------------.           ,-----------------------------------------------------.
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,             KC_LBRC, KC_RBRC,  FNRA_C, XXXXXXX,  FNRA_L, XXXXXXX,\
+  //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
+      XXXXXXX,  FNRA_A,  FNRA_O,  FNRA_E,   KC_LT,   KC_GT,             KC_LPRN, KC_RPRN, XXXXXXX,  FNRA_N,  FNRA_S, XXXXXXX,\
+  //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  FNRA_X,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  FNRA_Z, XXXXXXX,\
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|--------|
+                                 XXXXXXX, KC_LCTL, XXXXXXX,    XXXXXXX, KC_LALT, KC_RSFT\
+                             //`--------------------------'  `--------------------------'
+
   )
 };
 
