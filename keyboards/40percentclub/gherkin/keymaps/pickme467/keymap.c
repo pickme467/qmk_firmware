@@ -4,7 +4,7 @@ enum {
       MAIN = 0,
       CURSORS,
       NUMBERS,
-      BRACES,
+      RALTS,
       FUNCTIONS,
 };
 
@@ -62,20 +62,28 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FN_R MT(MOD_RCTL, KC_R)
 #define FN_L MT(MOD_RSFT, KC_L)
 
-#define FN_U MT(MOD_RALT, KC_U)
+#define FN_J LT(RALTS, KC_J)
 #define FN_X TD(UPPER_LOWER_MOD)
 #define FN_B KC_SPC
 
-#define FNN_J MO(BRACES)
-#define FNN_M MO(BRACES)
 #define FN_SPC KC_B
+
+#define FNRA_A RALT(KC_A)
+#define FNRA_C RALT(KC_C)
+#define FNRA_E RALT(KC_E)
+#define FNRA_L RALT(KC_L)
+#define FNRA_N RALT(KC_N)
+#define FNRA_O RALT(KC_O)
+#define FNRA_S RALT(KC_S)
+#define FNRA_X RALT(KC_X)
+#define FNRA_Z RALT(KC_Z)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [MAIN] = LAYOUT_ortho_3x10(
     FN_QUOT,   FN_COMM,    FN_DOT,      FN_P,      KC_Y,      KC_F,      FN_G,      FN_C,      FN_R,      FN_L,
-       KC_A,      KC_O,      KC_E,      FN_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
-    KC_SCLN,      KC_Q,      KC_J,      KC_K,      FN_X,      FN_B,      KC_M,      KC_W,      KC_V,      KC_Z
+       KC_A,      KC_O,      KC_E,      KC_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
+    KC_SCLN,      KC_Q,      FN_J,      KC_K,      FN_X,      FN_B,      KC_M,      KC_W,      KC_V,      KC_Z
   ),
 
   [CURSORS] = LAYOUT_ortho_3x10(
@@ -87,13 +95,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUMBERS] = LAYOUT_ortho_3x10(
        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
      KC_TAB,   XXXXXXX,    KC_EQL,   KC_UNDS,   KC_MINS,   KC_SLSH,   KC_BSLS,   KC_PLUS,   KC_QUES,   KC_BSPC,
-     KC_ESC,   XXXXXXX,     FNN_J,      KC_X,   XXXXXXX,    FN_SPC,      FNN_M,   KC_TILD,    KC_GRV,    KC_ENT
+     KC_ESC,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,    FN_SPC,   XXXXXXX,   KC_TILD,    KC_GRV,    KC_ENT
   ),
 
-  [BRACES] = LAYOUT_ortho_3x10(
-    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LBRC,   KC_RBRC,    KC_INS,
-     KC_TAB,   XXXXXXX,   XXXXXXX,     KC_LT,     KC_GT,   XXXXXXX,   XXXXXXX,   KC_LPRN,   KC_RPRN, KC_DELETE,
-    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,    FN_SPC,   XXXXXXX,   KC_LCBR,   KC_RCBR,   KC_PIPE
+  [RALTS] = LAYOUT_ortho_3x10(
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LCBR,   KC_RCBR,   KC_LBRC,   KC_RBRC,    FNRA_C,  KC_DELETE,    FNRA_L,
+     FNRA_A,    FNRA_O,    FNRA_E,     KC_LT,     KC_GT,   KC_LPRN,   KC_RPRN,   XXXXXXX,     FNRA_N,    FNRA_S,
+    XXXXXXX,   XXXXXXX,   XXXXXXX,    FNRA_X,   XXXXXXX,    FN_SPC,   XXXXXXX,   KC_LCBR,    KC_PIPE,    FNRA_Z
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
