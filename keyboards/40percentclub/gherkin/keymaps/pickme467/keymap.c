@@ -89,19 +89,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [CURSORS] = LAYOUT_ortho_3x10(
     KC_EXLM,     KC_AT,   KC_HASH,    KC_DLR,   KC_PERC,   KC_CIRC,   KC_AMPR,   KC_ASTR,    XXXXXXX,   KC_CLCK,
     KC_HOME, KC_PGDOWN,   KC_PGUP,    KC_END,   KC_COMM,    KC_DOT,   KC_LEFT,     KC_UP,    KC_DOWN,  KC_RIGHT,
-    KC_LSFT,   KC_LALT,   KC_LCTL,    KC_LGUI,  XXXXXXX,    FN_SPC,   KC_RGUI,   KC_RCTL,    KC_LALT,   KC_RSFT
+    KC_LSFT,   KC_LALT,   KC_LCTL,    KC_LGUI,  XXXXXXX,    FN_SPC, KC_INSERT,   KC_RCTL,    KC_LALT,   KC_RSFT
   ),
 
   [NUMBERS] = LAYOUT_ortho_3x10(
        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
      KC_TAB,   XXXXXXX,    KC_EQL,   KC_UNDS,   KC_MINS,   KC_SLSH,   KC_BSLS,   KC_PLUS,   KC_QUES,   KC_BSPC,
-     KC_ESC,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,    FN_SPC,   XXXXXXX,   KC_TILD,    KC_GRV,    KC_ENT
+     KC_ESC,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,    FN_SPC,   KC_PIPE,   KC_TILD,    KC_GRV,    KC_ENT
   ),
 
   [RALTS] = LAYOUT_ortho_3x10(
     XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LCBR,   KC_RCBR,   KC_LBRC,   KC_RBRC,    FNRA_C,  KC_DELETE,    FNRA_L,
      FNRA_A,    FNRA_O,    FNRA_E,     KC_LT,     KC_GT,   KC_LPRN,   KC_RPRN,   XXXXXXX,     FNRA_N,    FNRA_S,
-    XXXXXXX,   XXXXXXX,   XXXXXXX,    FNRA_X,   XXXXXXX,    FN_SPC,   XXXXXXX,   KC_LCBR,    KC_PIPE,    FNRA_Z
+    XXXXXXX,   XXXXXXX,   XXXXXXX,    FNRA_X,   XXXXXXX,    FN_SPC,   XXXXXXX,   KC_LCBR,    XXXXXXX,    FNRA_Z
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(

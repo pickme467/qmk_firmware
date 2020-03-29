@@ -4,8 +4,7 @@
 #define _LOWER 1
 #define _RAISE 2
 #define _ADJUST 3
-#define _BRACES 4
-#define _RALT 5
+#define _RALT 4
 
 enum {
       LOWER_UPPER_MOD = 0,
@@ -74,7 +73,6 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FN_LK2 KC_RIGHT
 #define FN_LK3 KC_PGDOWN
 #define FN_LK4 KC_DELETE
-#define FN_RK2 MO(_BRACES)
 #define FN_AK1 KC__MUTE
 #define FN_AK2 KC__VOLDOWN
 #define FN_AK3 KC__VOLUP
@@ -121,9 +119,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        KC_TAB, XXXXXXX,  KC_EQL, KC_UNDS, KC_MINS,                      KC_SLSH, KC_BSLS, KC_PLUS, KC_QUES, KC_BSPC,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-       KC_ESC, XXXXXXX,  FN_RK2, XXXXXXX, XXXXXXX,                      KC_PIPE,  FN_RK2, KC_TILD,  KC_GRV,  KC_ENT,\
+       KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_PIPE, KC_TILD,  KC_GRV,  KC_ENT,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_RGUI,  FN_RK2\
+                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_RGUI, KC_RSFT\
                              //`--------------------------'  `--------------------------'
   ),
 
@@ -134,18 +132,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_LSFT, KC_LCTL, KC_LGUI, KC_LALT,  KC_F11,                       KC_F12, KC_LALT, KC_RGUI, KC_RCTL, KC_RSFT,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         RESET, KC_SLCK, XXXXXXX, XXXXXXX,  FN_AK1,                       FN_AK2,  FN_AK3, KC_MUTE, KC_VOLD, KC_VOLU,\
-  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_LALT, KC_LGUI\
-                             //`--------------------------'  `--------------------------'
- ),
-
-  [_BRACES] = LAYOUT( \
-  //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX,\
-  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX,   KC_LT,   KC_GT,                      XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN, XXXXXXX,\
-  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_LALT, KC_LGUI\
                              //`--------------------------'  `--------------------------'
