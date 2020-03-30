@@ -67,8 +67,8 @@ qk_tap_dance_action_t tap_dance_actions[] =
    [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_finish, upper_lower_reset, 275)
   };
 
-#define FN_DK3 TD(UPPER_LOWER_MOD)
-#define FN_DK4 TD(UPPER_LOWER_MOD)
+#define FN_DK1 TD(UPPER_LOWER_MOD)
+#define FN_DK2 TD(UPPER_LOWER_MOD)
 #define FN_LK1 KC_INSERT
 #define FN_LK2 KC_RIGHT
 #define FN_LK3 KC_PGDOWN
@@ -87,7 +87,6 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FNRA_X RALT(KC_X)
 #define FNRA_Z RALT(KC_Z)
 
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVORAK] = LAYOUT( \
   //,-----------------------------------------------------.           ,-----------------------------------------------------.
@@ -97,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|--------|           |--------+--------+--------+--------+--------|--------|
       RGB_SAD, KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, RGB_SAI,\
   //|--------+--------+--------+--------+--------+--------|           |--------+--------+--------+--------|--------|--------|
-                                 FN_RALT, KC_LCTL,  FN_DK3,              FN_DK4,  KC_SPC, KC_RSFT\
+                                 FN_RALT, KC_LCTL,  FN_DK1,              FN_DK2,  KC_SPC, KC_RSFT\
                              //`--------------------------'  `        `--------------------------'
 
   ),
