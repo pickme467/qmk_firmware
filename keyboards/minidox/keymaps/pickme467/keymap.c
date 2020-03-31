@@ -4,7 +4,7 @@
 #define _LOWER 1
 #define _RAISE 2
 #define _ADJUST 3
-#define _RALT 4
+#define _POLISH 4
 
 enum {
       LOWER_UPPER_MOD = 0,
@@ -76,7 +76,7 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FN_AK1 KC__MUTE
 #define FN_AK2 KC__VOLDOWN
 #define FN_AK3 KC__VOLUP
-#define FN_RALT MO(_RALT)
+#define FN_RALT MO(_POLISH)
 #define FNRA_A RALT(KC_A)
 #define FNRA_C RALT(KC_C)
 #define FNRA_E RALT(KC_E)
@@ -96,20 +96,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 FN_RALT, KC_LCTL,  FN_DK1,     FN_DK2,  KC_SPC, KC_RSFT\
+                                 FN_RALT, KC_LCTL,  FN_DK2,    KC_LALT,  KC_SPC, KC_RSFT\
                              //`--------------------------'  `--------------------------'
 
   ),
 
   [_LOWER] = LAYOUT( \
   //,--------------------------------------------.                    ,--------------------------------------------.
-      KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, XXXXXXX, KC_CLCK,\
+      KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_HOME,  FN_LK3, KC_PGUP,  KC_END, KC_COMM,                       KC_DOT, KC_LEFT,   KC_UP, KC_DOWN,  FN_LK2,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, KC_LGUI, XXXXXXX,                       FN_LK1,  FN_LK4, KC_RSFT, KC_RCTL,  KC_ENT,\
+      KC_CLCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       FN_LK1,  FN_LK4, KC_RSFT, KC_RCTL,  KC_ENT,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LSFT, KC_LCTL, XXXXXXX,    XXXXXXX, KC_RCTL, KC_RGUI\
+                                 KC_LSFT, KC_LCTL, XXXXXXX,    KC_RGUI, KC_RCTL, KC_RSFT\
                              //`--------------------------'  `--------------------------'
     ),
 
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_PIPE, KC_TILD,  KC_GRV,  KC_ENT,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_RGUI, KC_RSFT\
+                                 KC_LSFT, KC_LGUI, XXXXXXX,    KC_RGUI, KC_RCTL, KC_LALT\
                              //`--------------------------'  `--------------------------'
   ),
 
@@ -133,11 +133,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         RESET, KC_SLCK, XXXXXXX, XXXXXXX,  FN_AK1,                       FN_AK2,  FN_AK3, KC_MUTE, KC_VOLD, KC_VOLU,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LALT, KC_LGUI, XXXXXXX,    XXXXXXX, KC_LALT, KC_LGUI\
+                                 KC_LALT, KC_LGUI, XXXXXXX,    KC_RGUI, KC_RCTL, KC_LALT\
                              //`--------------------------'  `--------------------------'
  ),
 
-  [_RALT] = LAYOUT( \
+  [_POLISH] = LAYOUT( \
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,                      KC_LBRC, KC_RBRC,  FNRA_C, XXXXXXX,  FNRA_L,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -145,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  FNRA_X,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  FNRA_Z,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, KC_LCTL, XXXXXXX,    XXXXXXX, KC_LALT, KC_RSFT\
+                                 XXXXXXX, KC_LCTL, XXXXXXX,    KC_LALT, KC_RCTL, KC_RSFT\
                              //`--------------------------'  `--------------------------'
 
   )
