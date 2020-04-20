@@ -2,7 +2,6 @@
 
 enum {
       MAIN = 0,
-      CURSORS,
       NUMBERS,
       RALTS,
       FUNCTIONS,
@@ -13,7 +12,6 @@ enum {
 };
 
 void layer_reset(void) {
-  layer_off(CURSORS);
   layer_off(NUMBERS);
   layer_off(FUNCTIONS);
 }
@@ -23,9 +21,6 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
     switch (state->count) {
     case 1:
       layer_on(NUMBERS);
-      break;
-    case 2:
-      layer_on(CURSORS);
       break;
     default:
       layer_on(FUNCTIONS);
@@ -86,12 +81,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_SCLN,      KC_Q,      FN_J,      KC_K,      FN_X,      FN_B,      KC_M,      KC_W,      KC_V,      KC_Z
   ),
 
-  [CURSORS] = LAYOUT_ortho_3x10(
-    KC_EXLM,     KC_AT,   KC_HASH,    KC_DLR,   KC_PERC,   KC_CIRC,   KC_AMPR,   KC_ASTR,    KC_LPRN,   KC_RPRN,
-    KC_HOME, KC_PGDOWN,   KC_PGUP,    KC_END,   KC_COMM,    KC_DOT,   KC_LEFT,     KC_UP,    KC_DOWN,  KC_RIGHT,
-    XXXXXXX,   KC_CLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,    FN_SPC, KC_INSERT, KC_DELETE,    XXXXXXX,    KC_ENT
-  ),
-
   [NUMBERS] = LAYOUT_ortho_3x10(
        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
      KC_TAB,   KC_COMM,    KC_DOT,   KC_UNDS,   KC_MINS,   KC_SLSH,   KC_BSLS,   KC_PLUS,   KC_QUES,   KC_BSPC,
@@ -106,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
       KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
-    XXXXXXX,   XXXXXXX,   FN_MUTE,   FN_VOLD,    KC_F11,    KC_F12,   FN_VOLU,   KC_VOLU,   KC_VOLD,   KC_MUTE,
-      RESET,   KC_SLCK,   XXXXXXX,      KC_X,   XXXXXXX,    FN_SPC,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX
+  KC_INSERT, KC_DELETE,   FN_MUTE,   FN_VOLD,    KC_F11,    KC_F12,   FN_VOLU,   KC_VOLU,   KC_VOLD,   KC_MUTE,
+      RESET,   KC_CLCK,   KC_SLCK,      KC_X,   XXXXXXX,    FN_SPC,   KC_HOME, KC_PGDOWN,   KC_PGUP,    KC_END
   ),
 };
 

@@ -3,8 +3,7 @@
 #define _DVORAK 0
 #define _LOWER 1
 #define _RAISE 2
-#define _ADJUST 3
-#define _POLISH 4
+#define _POLISH 3
 
 enum {
       LOWER_UPPER_MOD = 0,
@@ -14,7 +13,6 @@ enum {
 void layer_reset(void) {
   layer_off(_LOWER);
   layer_off(_RAISE);
-  layer_off(_ADJUST);
 }
 
 void lower_upper_finish(qk_tap_dance_state_t* state, void* user_data) {
@@ -23,12 +21,9 @@ void lower_upper_finish(qk_tap_dance_state_t* state, void* user_data) {
     case 1:
       layer_on(_LOWER);
       break;
-    case 2:
+    default:
       layer_on(_RAISE);
       break;
-    default:
-      layer_on(_ADJUST);
-       break;
     }
   } else {
     layer_reset();
@@ -45,12 +40,9 @@ void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
     case 1:
       layer_on(_RAISE);
       break;
-    case 2:
+    default:
       layer_on(_LOWER);
       break;
-    default:
-      layer_on(_ADJUST);
-       break;
     }
   } else {
     layer_reset();
@@ -101,18 +93,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   ),
 
-  [_LOWER] = LAYOUT( \
-  //,--------------------------------------------.                    ,--------------------------------------------.
-      KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,\
-  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_HOME,  FN_LK3, KC_PGUP,  KC_END, XXXXXXX,                      XXXXXXX, KC_LEFT,   KC_UP, KC_DOWN,  FN_LK2,\
-  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_CLCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  FN_LK1,  FN_LK4, XXXXXXX,  KC_ENT,\
-  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_LGUI, KC_LCTL, XXXXXXX,    KC_LALT, KC_RGUI, KC_RSFT\
-                             //`--------------------------'  `--------------------------'
-    ),
-
   [_RAISE] = LAYOUT( \
   //,--------------------------------------------.                    ,--------------------------------------------.
          KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,\
@@ -125,13 +105,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //`--------------------------'  `--------------------------'
   ),
 
-  [_ADJUST] = LAYOUT( \
+  [_LOWER] = LAYOUT( \
   //,--------------------------------------------.                    ,--------------------------------------------.
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX,  FN_AK1,  FN_AK2,  KC_F11,                       KC_F12,  FN_AK3, KC_VOLU, KC_VOLD, KC_MUTE,\
+       FN_LK1,  FN_LK4,  FN_AK1,  FN_AK2,  KC_F11,                       KC_F12,  FN_AK3, KC_VOLU, KC_VOLD, KC_MUTE,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-        RESET, KC_SLCK, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+        RESET, KC_CLCK, KC_SLCK, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_HOME,  FN_LK3, KC_PGUP,  KC_END,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_LGUI, KC_LCTL, XXXXXXX,    KC_LALT, KC_RGUI, KC_RSFT\
                              //`--------------------------'  `--------------------------'
