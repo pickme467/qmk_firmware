@@ -97,9 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
          KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-       KC_TAB, KC_COMM,  KC_DOT, KC_UNDS, KC_MINS,                      KC_SLSH, KC_BSLS, KC_PLUS, KC_QUES, KC_BSPC,\
+       KC_TAB, KC_COMM,  KC_DOT, KC_UNDS, KC_MINS,                      KC_PIPE, KC_SLSH, KC_PLUS, KC_QUES, KC_BSPC,\
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-       KC_ESC, XXXXXXX,  KC_EQL, XXXXXXX, XXXXXXX,                      KC_RCTL, KC_PIPE, KC_TILD,  KC_GRV,  KC_ENT,\
+       KC_ESC, XXXXXXX,  KC_EQL, XXXXXXX, XXXXXXX,                      KC_RCTL, KC_BSLS, KC_TILD,  KC_GRV,  KC_ENT,\
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_LGUI, KC_LCTL, XXXXXXX,    KC_LALT, KC_RGUI, KC_RSFT\
                              //`--------------------------'  `--------------------------'
