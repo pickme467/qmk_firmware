@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
 enum {
-      MAIN = 0,
+      BASE = 0,
       NUMBERS,
       RALTS,
       FUNCTIONS,
@@ -72,10 +72,12 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FNRA_S RALT(KC_S)
 #define FNRA_X RALT(KC_X)
 #define FNRA_Z RALT(KC_Z)
+#define HYPER KC_F9
+#define SUPER KC_F8
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [MAIN] = LAYOUT_ortho_3x10(
+  [BASE] = LAYOUT_ortho_3x10(
     FN_QUOT,   FN_COMM,    FN_DOT,      FN_P,      KC_Y,      KC_F,      FN_G,      FN_C,      FN_R,      FN_L,
        KC_A,      KC_O,      KC_E,      KC_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
     KC_SCLN,      KC_Q,      FN_J,      KC_K,      FN_X,      FN_B,      KC_M,      KC_W,      KC_V,      KC_Z
@@ -90,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [RALTS] = LAYOUT_ortho_3x10(
     XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LCBR,   KC_RCBR,   KC_LBRC,   KC_RBRC,    FNRA_C,    XXXXXXX,    FNRA_L,
      FNRA_A,    FNRA_O,    FNRA_E,     KC_LT,     KC_GT,   KC_LPRN,   KC_RPRN,     KC_UP,     FNRA_N,    FNRA_S,
-    XXXXXXX,   XXXXXXX,   XXXXXXX,    FNRA_X,   XXXXXXX,    FN_SPC,   KC_LEFT,   KC_DOWN,   KC_RIGHT,    FNRA_Z
+    XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,    FN_SPC,   KC_LEFT,   KC_DOWN,   KC_RIGHT,    FNRA_Z
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
