@@ -104,9 +104,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ),
 
   [_RALT] = LAYOUT( \
-      XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LCBR,   KC_RCBR,         KC_LBRC,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,\
-       FNRA_A,    FNRA_O,    FNRA_E,     KC_LT,     KC_GT,         KC_LPRN,   KC_RPRN,     KC_UP,    FNRA_N,    FNRA_S,\
+      XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LBRC,   KC_LCBR,         KC_RCBR,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,\
+       FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,     KC_GT,         KC_LT,     KC_RPRN,     KC_UP,    FNRA_N,    FNRA_S,\
       XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,         XXXXXXX,   KC_LEFT,   KC_DOWN,    FN_LK2,    FNRA_Z,\
-                            XXXXXXX,   KC_LCTL,   KC_LGUI,         KC_LALT,    KC_SPC,     KC_RSFT\
+                            XXXXXXX,   KC_LCTL,   KC_LGUI,         KC_LALT,    KC_SPC,   KC_RSFT\
   )
 };

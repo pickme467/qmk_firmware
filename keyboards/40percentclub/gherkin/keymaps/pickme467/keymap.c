@@ -90,8 +90,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [RALTS] = LAYOUT_ortho_3x10(
-    XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LCBR,   KC_RCBR,   KC_LBRC,   KC_RBRC,    FNRA_C,    XXXXXXX,    FNRA_L,
-     FNRA_A,    FNRA_O,    FNRA_E,     KC_LT,     KC_GT,   KC_LPRN,   KC_RPRN,     KC_UP,     FNRA_N,    FNRA_S,
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LBRC,   KC_LCBR,   KC_RCBR,   KC_RBRC,    FNRA_C,    XXXXXXX,    FNRA_L,
+     FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,     KC_GT,     KC_LT,   KC_RPRN,     KC_UP,     FNRA_N,    FNRA_S,
     XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,    FN_SPC,   KC_LEFT,   KC_DOWN,   KC_RIGHT,    FNRA_Z
   ),
 
