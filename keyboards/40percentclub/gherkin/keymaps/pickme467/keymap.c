@@ -44,9 +44,6 @@ qk_tap_dance_action_t tap_dance_actions[] =
    [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_function, upper_lower_reset, 275),
   };
 
-#define FN_MUTE KC__MUTE
-#define FN_VOLU KC__VOLUP
-#define FN_VOLD KC__VOLDOWN
 
 #define FN_QUOT MT(MOD_LSFT, KC_QUOT)
 #define FN_COMM MT(MOD_LCTL, KC_COMM)
@@ -59,10 +56,10 @@ qk_tap_dance_action_t tap_dance_actions[] =
 
 #define FN_J LT(RALTS, KC_J)
 #define FN_X TD(UPPER_LOWER_MOD)
-#define FN_B KC_SPC
 
-#define FN_SPC KC_B
-
+#define FN_MUTE KC__MUTE
+#define FN_VOLU KC__VOLUP
+#define FN_VOLD KC__VOLDOWN
 #define FNRA_A RALT(KC_A)
 #define FNRA_C RALT(KC_C)
 #define FNRA_E RALT(KC_E)
@@ -80,25 +77,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_ortho_3x10(
     FN_QUOT,   FN_COMM,    FN_DOT,      FN_P,      KC_Y,      KC_F,      FN_G,      FN_C,      FN_R,      FN_L,
        KC_A,      KC_O,      KC_E,      KC_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
-    KC_SCLN,      KC_Q,      FN_J,      KC_K,      FN_X,      FN_B,      KC_M,      KC_W,      KC_V,      KC_Z
+    KC_SCLN,      KC_Q,      FN_J,      KC_K,      FN_X,    KC_SPC,      KC_M,      KC_W,      KC_V,      KC_Z
   ),
 
   [NUMBERS] = LAYOUT_ortho_3x10(
        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
      KC_TAB,   KC_COMM,    KC_DOT,   KC_UNDS,   KC_MINS,   KC_PIPE,   KC_SLSH,   KC_PLUS,   KC_QUES,   KC_BSPC,
-     KC_ESC,   XXXXXXX,    KC_EQL,      KC_X,   XXXXXXX,    FN_SPC,   KC_BSLS,   KC_TILD,    KC_GRV,    KC_ENT
+     KC_ESC,   XXXXXXX,    KC_EQL,      KC_X,   XXXXXXX,      KC_B,   KC_BSLS,   KC_TILD,    KC_GRV,    KC_ENT
   ),
 
   [RALTS] = LAYOUT_ortho_3x10(
     XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LBRC,   KC_LCBR,   KC_RCBR,   KC_RBRC,    FNRA_C,    XXXXXXX,    FNRA_L,
      FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,     KC_GT,     KC_LT,   KC_RPRN,     KC_UP,     FNRA_N,    FNRA_S,
-    XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,    FN_SPC,   KC_LEFT,   KC_DOWN,   KC_RIGHT,    FNRA_Z
+    XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,      KC_B,   KC_LEFT,   KC_DOWN,   KC_RIGHT,    FNRA_Z
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
       KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
   KC_INSERT, KC_DELETE,   FN_MUTE,   FN_VOLD,    KC_F11,    KC_F12,   FN_VOLU,   KC_VOLU,   KC_VOLD,   KC_MUTE,
-      RESET,   KC_CLCK,   KC_SLCK,      KC_X,   XXXXXXX,    FN_SPC,   KC_HOME, KC_PGDOWN,   KC_PGUP,    KC_END
+      RESET,   KC_CLCK,   KC_SLCK,      KC_X,   XXXXXXX,      KC_B,   KC_HOME, KC_PGDOWN,   KC_PGUP,    KC_END
   ),
 };
 

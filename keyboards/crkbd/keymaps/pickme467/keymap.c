@@ -61,14 +61,11 @@ qk_tap_dance_action_t tap_dance_actions[] =
 
 #define FN_DK1 TD(UPPER_LOWER_MOD)
 #define FN_DK2 TD(UPPER_LOWER_MOD)
-#define FN_LK1 KC_INSERT
-#define FN_LK2 KC_RIGHT
-#define FN_LK3 KC_PGDOWN
-#define FN_LK4 KC_DELETE
-#define FN_AK1 KC__MUTE
-#define FN_AK2 KC__VOLDOWN
-#define FN_AK3 KC__VOLUP
 #define FN_RALT MO(_RALT)
+
+#define FN_MUTE KC__MUTE
+#define FN_VOLD KC__VOLDOWN
+#define FN_VOLU KC__VOLUP
 #define FNRA_A RALT(KC_A)
 #define FNRA_C RALT(KC_C)
 #define FNRA_E RALT(KC_E)
@@ -98,15 +95,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT( \
       XXXXXXX,     KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,            KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,   XXXXXXX,\
-      XXXXXXX,    FN_LK1,    FN_LK4,    FN_AK1,    FN_AK2,    KC_F11,           KC_F12,    FN_AK3,   KC_VOLU,   KC_VOLD,   KC_MUTE,   XXXXXXX,\
-      EEP_RST,     RESET,   KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,          XXXXXXX,   KC_HOME,    FN_LK3,   KC_PGUP,    KC_END,   XXXXXXX,\
+      XXXXXXX, KC_INSERT, KC_DELETE,   FN_MUTE,   FN_VOLD,    KC_F11,           KC_F12,   FN_VOLU,   KC_VOLU,   KC_VOLD,   KC_MUTE,   XXXXXXX,\
+      EEP_RST,     RESET,   KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,          XXXXXXX,   KC_HOME, KC_PGDOWN,   KC_PGUP,    KC_END,   XXXXXXX,\
                                        KC_LGUI,   KC_LCTL,   XXXXXXX,          KC_LALT,   KC_RGUI,   KC_RSFT\
   ),
 
   [_RALT] = LAYOUT( \
       XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LBRC,   KC_LCBR,          KC_RCBR,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,   XXXXXXX,\
       XXXXXXX,    FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,     KC_GT,            KC_LT,   KC_RPRN,     KC_UP,    FNRA_N,    FNRA_S,   XXXXXXX,\
-      XXXXXXX,   XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,          XXXXXXX,   KC_LEFT,   KC_DOWN,    FN_LK2,    FNRA_Z,   XXXXXXX,\
+      XXXXXXX,   XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,          XXXXXXX,   KC_LEFT,   KC_DOWN,  KC_RIGHT,    FNRA_Z,   XXXXXXX,\
                                        XXXXXXX,   KC_LCTL,   KC_LGUI,          KC_LALT,    KC_SPC,   KC_RSFT\
   )
 };
