@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_RAISE] = LAYOUT( \
       RGB_VAD,      KC_1,      KC_2,      KC_3,      KC_4,      KC_5,             KC_6,      KC_7,      KC_8,      KC_9,      KC_0,   RGB_VAI,\
      RGB_RMOD,    KC_TAB,   KC_COMM,    KC_DOT,   KC_UNDS,   KC_MINS,          KC_PIPE,   KC_SLSH,   KC_PLUS,   KC_QUES,   KC_BSPC,   RGB_MOD,\
-      RGB_TOG,    KC_ESC,   XXXXXXX,    KC_GRV,   XXXXXXX,   XXXXXXX,          KC_RCTL,   KC_BSLS,    KC_TILD,   KC_EQL,    KC_ENT,   RGB_TOG,\
+      RGB_TOG,    KC_ESC,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,          KC_RCTL,   KC_BSLS,    KC_EQL,   XXXXXXX,    KC_ENT,   RGB_TOG,\
                                        KC_LGUI,   KC_LCTL,   XXXXXXX,          KC_LALT,   KC_RGUI,   KC_RSFT\
   ),
 
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_RALT] = LAYOUT( \
-      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LBRC,     KC_LT,            KC_GT,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,   XXXXXXX,\
+      XXXXXXX,   XXXXXXX,    KC_GRV,   KC_TILD,   KC_LBRC,     KC_LT,            KC_GT,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,   XXXXXXX,\
       XXXXXXX,    FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,   KC_LCBR,          KC_RCBR,   KC_RPRN,     KC_UP,    FNRA_N,    FNRA_S,   XXXXXXX,\
       XXXXXXX,   XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,          XXXXXXX,   KC_LEFT,   KC_DOWN,  KC_RIGHT,    FNRA_Z,   XXXXXXX,\
                                        XXXXXXX,   KC_LCTL,   KC_LGUI,          KC_LALT,    KC_SPC,   KC_RSFT\
