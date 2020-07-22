@@ -123,15 +123,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT( \
       XXXXXXX,     KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,            KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,   XXXXXXX,\
-      XXXXXXX, KC_INSERT, KC_DELETE,   FN_VOLU,   FN_MUTE,    KC_F11,           KC_F12,   KC_SLCK,   KC_PGUP,   KC_VOLU,   KC_MUTE,   XXXXXXX,\
-      EEP_RST,     RESET,   KC_CLCK,   FN_VOLD,   XXXXXXX,   XXXXXXX,          KC_HOME,    KC_END, KC_PGDOWN,   KC_VOLD,    KC_ENT,   XXXXXXX,\
+      XXXXXXX,   KC_CLCK,   KC_SLCK,   FN_VOLU,   FN_MUTE,    KC_F11,           KC_F12,   XXXXXXX,   KC_PGUP,   KC_VOLU,   KC_MUTE,   XXXXXXX,\
+      EEP_RST,     RESET,   XXXXXXX,   FN_VOLD,   XXXXXXX,   XXXXXXX,          KC_HOME,    KC_END, KC_PGDOWN,   KC_VOLD,    KC_ENT,   XXXXXXX,\
                                        KC_LGUI,   KC_LCTL,   XXXXXXX,          FN_LALT,    KC_SPC,   KC_RSFT\
   ),
 
   [_RALT] = LAYOUT( \
-      XXXXXXX,   XXXXXXX,    KC_GRV,   KC_TILD,   KC_LBRC,     KC_LT,            KC_GT,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,   XXXXXXX,\
+      XXXXXXX, KC_INSERT,    KC_GRV,   KC_TILD,   KC_LBRC,     KC_LT,            KC_GT,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,   XXXXXXX,\
       XXXXXXX,    FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,   KC_LCBR,          KC_RCBR,   KC_RPRN,     KC_UP,    FNRA_N,    FNRA_S,   XXXXXXX,\
-      XXXXXXX,   XXXXXXX,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,          XXXXXXX,   KC_LEFT,   KC_DOWN,  KC_RIGHT,    FNRA_Z,   XXXXXXX,\
+      XXXXXXX, KC_DELETE,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,          XXXXXXX,   KC_LEFT,   KC_DOWN,  KC_RIGHT,    FNRA_Z,   XXXXXXX,\
                                        XXXXXXX,   KC_LCTL,   KC_LGUI,          FN_LALT,    KC_SPC,   KC_RSFT\
   )
 };
