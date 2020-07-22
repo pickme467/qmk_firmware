@@ -44,7 +44,6 @@ qk_tap_dance_action_t tap_dance_actions[] =
    [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_function, upper_lower_reset, 275),
   };
 
-
 #define FN_QUOT MT(MOD_LSFT, KC_QUOT)
 #define FN_COMM MT(MOD_LCTL, KC_COMM)
 #define FN_DOT MT(MOD_LALT, KC_DOT)
@@ -71,6 +70,22 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FNRA_Z RALT(KC_Z)
 #define HYPER KC_F9
 #define SUPER KC_F8
+
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case FN_P:
+  case FN_G:
+    // GUI
+    return TAPPING_TERM * 3;
+  case FN_C:
+  case FN_R:
+    // ALT, CTRL
+    return TAPPING_TERM * 3;
+  default:
+    return TAPPING_TERM;
+  }
+}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
