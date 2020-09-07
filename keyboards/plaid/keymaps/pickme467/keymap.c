@@ -174,6 +174,5 @@ void eeconfig_init_user(void) {  // EEPROM is getting reset!
   led_config.raw = 0;
   led_config.red_mode = LEDMODE_ON;
   led_config.green_mode = LEDMODE_MODS;
-      eeconfig_update_user(led_config.raw);
   eeconfig_update_user(led_config.raw);
 }
