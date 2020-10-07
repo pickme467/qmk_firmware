@@ -178,8 +178,8 @@ void keyboard_post_init_user(void) {
   led_config.raw = eeconfig_read_user();
 
   led_config.raw = 0;
-  led_config.red_mode = LEDMODE_KEY;
-  led_config.green_mode = LEDMODE_OFF;
+  led_config.red_mode = LEDMODE_MODS;
+  led_config.green_mode = LEDMODE_KEY;
 
   if(led_config.red_mode == LEDMODE_ON) {
       writePinHigh(LED_RED);
