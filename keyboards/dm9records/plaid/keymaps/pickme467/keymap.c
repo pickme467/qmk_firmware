@@ -13,6 +13,18 @@ enum {
       ALT_GUI_MOD
 };
 
+// array of keys considered modifiers for led purposes
+const uint16_t modifiers[] = {
+    KC_LCTL,
+    KC_RCTL,
+    KC_LALT,
+    KC_RALT,
+    KC_LSFT,
+    KC_RSFT,
+    KC_LGUI,
+    KC_RGUI
+};
+
 void layer_reset(void) {
   layer_off(NUMBERS);
   layer_off(FUNCTIONS);
@@ -158,8 +170,16 @@ led_config_t led_config;
 
 //Set leds to saved state during powerup
 void keyboard_post_init_user(void) {
+  // set LED pin modes
+  //  setPinOutput(LED_RED);
+  //  setPinOutput(LED_GREEN);
+
   // Call the post init code.
   led_config.raw = eeconfig_read_user();
+
+  led_config.raw = 0;
+  led_config.red_mode = LEDMODE_KEY;
+  led_config.green_mode = LEDMODE_OFF;
 
   if(led_config.red_mode == LEDMODE_ON) {
       writePinHigh(LED_RED);
@@ -172,7 +192,69 @@ void keyboard_post_init_user(void) {
 
 void eeconfig_init_user(void) {  // EEPROM is getting reset!
   led_config.raw = 0;
-  led_config.red_mode = LEDMODE_ON;
-  led_config.green_mode = LEDMODE_MODS;
+  led_config.red_mode = LEDMODE_KEY;
+  led_config.green_mode = LEDMODE_OFF;
+      eeconfig_update_user(led_config.raw);
   eeconfig_update_user(led_config.raw);
+}
+
+void led_keypress_update(uint8_t led, uint8_t led_mode, uint16_t keycode, keyrecord_t *record) {
+    switch (led_mode) {
+      case LEDMODE_MODS:
+        for (int i=0;i<sizeof(modifiers) / sizeof(modifiers[0]);i++) {
+          if(keycode==modifiers[i]) {
+            if (record->event.pressed) {
+              writePinHigh(led);
+            }
+            else {
+              writePinLow(led);
+            }
+          }
+        }
+        break;
+      case LEDMODE_BLINKIN:
+        if (record->event.pressed) {
+          if(rand() % 2 == 1) {
+            if(rand() % 2 == 0) {
+              writePinLow(led);
+            }
+            else {
+              writePinHigh(led);
+            }
+          }
+        }
+        break;
+      case LEDMODE_KEY:
+        if (record->event.pressed) {
+          writePinHigh(led);
+          return;
+        }
+        else {
+          writePinLow(led);
+          return;
+        }
+        break;
+      case LEDMODE_ENTER:
+        if (keycode==KC_ENT) {
+          writePinHigh(led);
+        }
+        else {
+          writePinLow(led);
+        }
+        break;
+
+    }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  /* If the either led mode is keypressed based, call the led updater
+     then let it fall through the keypress handlers. Just to keep
+     the logic out of this procedure */
+  if (led_config.red_mode >= LEDMODE_MODS && led_config.red_mode <= LEDMODE_ENTER) {
+      led_keypress_update(LED_RED, led_config.red_mode, keycode, record);
+  }
+  if (led_config.green_mode >= LEDMODE_MODS && led_config.green_mode <= LEDMODE_ENTER) {
+      led_keypress_update(LED_GREEN, led_config.green_mode, keycode, record);
+  }
+  return true;
 }
