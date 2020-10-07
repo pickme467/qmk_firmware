@@ -160,7 +160,7 @@ led_config_t led_config;
 void keyboard_post_init_user(void) {
   // set LED pin modes
   //  setPinOutput(LED_RED);
-  //  setPinOutput(LED_GREEN);
+  setPinOutput(LED_GREEN);
 
   // Call the post init code.
   led_config.raw = eeconfig_read_user();
