@@ -13,18 +13,6 @@ enum {
       ALT_GUI_MOD
 };
 
-// array of keys considered modifiers for led purposes
-const uint16_t modifiers[] = {
-    KC_LCTL,
-    KC_RCTL,
-    KC_LALT,
-    KC_RALT,
-    KC_LSFT,
-    KC_RSFT,
-    KC_LGUI,
-    KC_RGUI
-};
-
 void layer_reset(void) {
   layer_off(NUMBERS);
   layer_off(FUNCTIONS);
@@ -197,6 +185,22 @@ void eeconfig_init_user(void) {  // EEPROM is getting reset!
       eeconfig_update_user(led_config.raw);
   eeconfig_update_user(led_config.raw);
 }
+
+// array of keys considered modifiers for led purposes
+const uint16_t modifiers[] = {
+    KC_LCTL,
+    KC_RCTL,
+    KC_LALT,
+    KC_RALT,
+    KC_LSFT,
+    KC_RSFT,
+    KC_LGUI,
+    KC_RGUI,
+    FN_DK2,
+    FN_RALT,
+    FN_LALT
+};
+
 
 void led_keypress_update(uint8_t led, uint8_t led_mode, uint16_t keycode, keyrecord_t *record) {
     switch (led_mode) {
