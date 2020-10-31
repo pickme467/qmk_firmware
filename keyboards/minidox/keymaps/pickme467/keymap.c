@@ -90,6 +90,7 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FN_LALT TD(ALT_GUI_MOD)
 
 #define FN_RALT MO(_RALT)
+#define FN_LGAL LALT(KC_LGUI)
 
 #define FN_MUTE KC__MUTE
 #define FN_VOLD KC__VOLDOWN
@@ -111,21 +112,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_QUOT,   KC_COMM,    KC_DOT,      KC_P,      KC_Y,            KC_F,      KC_G,      KC_C,      KC_R,      KC_L,\
          KC_A,      KC_O,      KC_E,      KC_U,      KC_I,            KC_D,      KC_H,      KC_T,      KC_N,      KC_S,\
       KC_SCLN,      KC_Q,      KC_J,      KC_K,      KC_X,            KC_B,      KC_M,      KC_W,      KC_V,      KC_Z,\
-                            FN_RALT,   KC_LCTL,    FN_DK2,         FN_LALT,    KC_SPC,   KC_RSFT\
+                            FN_RALT,   KC_LCTL,    FN_DK2,         KC_LALT,    KC_SPC,   KC_RSFT\
   ),
 
   [_RAISE] = LAYOUT( \
          KC_1,      KC_2,      KC_3,      KC_4,      KC_5,            KC_6,      KC_7,      KC_8,      KC_9,      KC_0,\
        KC_TAB,   KC_COMM,    KC_DOT,   KC_UNDS,   KC_MINS,         KC_PIPE,   KC_SLSH,   KC_PLUS,   KC_QUES,   KC_BSPC,\
        KC_ESC,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,         KC_RCTL,   KC_BSLS,    KC_EQL,   XXXXXXX,    KC_ENT,\
-                            KC_LGUI,   KC_LCTL,   XXXXXXX,         FN_LALT,    KC_SPC,   KC_RSFT\
+                            KC_LGUI,   KC_LCTL,   XXXXXXX,         KC_LGUI,    KC_SPC,   KC_RSFT\
   ),
 
   [_LOWER] = LAYOUT( \
         KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,           KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,\
       KC_CLCK,   KC_SLCK,   FN_VOLU,   FN_MUTE,    KC_F11,          KC_F12,   XXXXXXX,   KC_PGUP,   KC_VOLU,   KC_MUTE,\
         RESET,   XXXXXXX,   FN_VOLD,   XXXXXXX,   XXXXXXX,         KC_HOME,    KC_END, KC_PGDOWN,   KC_VOLD,    KC_ENT,\
-                            KC_LGUI,   KC_LCTL,   XXXXXXX,         FN_LALT,    KC_SPC,   KC_RSFT\
+                            KC_LGUI,   KC_LCTL,   XXXXXXX,         FN_LGAL,    KC_SPC,   KC_RSFT\
  ),
 
   [_RALT] = LAYOUT( \
