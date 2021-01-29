@@ -91,6 +91,7 @@ qk_tap_dance_action_t tap_dance_actions[] =
 
 #define FN_RALT MO(_RALT)
 #define FN_LGAL LALT(KC_LGUI)
+#define FN_LSHAL LALT(KC_RSFT)
 
 #define FN_MUTE KC__MUTE
 #define FN_VOLD KC__VOLDOWN
@@ -133,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX, KC_INSERT,    KC_GRV,   KC_TILD,   KC_LBRC,     KC_LT,            KC_GT,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,   XXXXXXX,\
       XXXXXXX,    FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,   KC_LCBR,          KC_RCBR,   KC_RPRN,     KC_UP,    FNRA_N,    FNRA_S,   XXXXXXX,\
       XXXXXXX, KC_DELETE,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,          XXXXXXX,   KC_LEFT,   KC_DOWN,  KC_RIGHT,    FNRA_Z,   XXXXXXX,\
-                                       XXXXXXX,   KC_LCTL,   KC_LGUI,          FN_LALT,    KC_SPC,   KC_RSFT\
+                                       XXXXXXX,   KC_LCTL,   KC_LGUI,          FN_LALT,  FN_LSHAL,   KC_RSFT\
   )
 };
 
