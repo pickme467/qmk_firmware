@@ -91,6 +91,9 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define FN_DK2 TD(UPPER_LOWER_MOD)
 #define FN_LALT TD(ALT_GUI_MOD)
 
+#define FN_P MT(MOD_LGUI, KC_P)
+#define FN_G MT(MOD_RGUI, KC_G)
+
 #define FN_RALT MO(RALTS)
 #define FN_LGAL LALT(KC_LGUI)
 
@@ -106,9 +109,20 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define HYPER KC_F9
 #define SUPER KC_F8
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case FN_P:
+  case FN_G:
+    // GUI
+    return TAPPING_TERM * 3;
+  default:
+    return TAPPING_TERM;
+  }
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_plaid_grid(
-    KC_QUOT,   KC_COMM,    KC_DOT,      KC_P,      KC_Y,   XXXXXXX,   XXXXXXX,      KC_F,      KC_G,      KC_C,      KC_R,      KC_L,
+    KC_QUOT,   KC_COMM,    KC_DOT,      FN_P,      KC_Y,   XXXXXXX,   XXXXXXX,      KC_F,      FN_G,      KC_C,      KC_R,      KC_L,
        KC_A,      KC_O,      KC_E,      KC_U,      KC_I,   XXXXXXX,   XXXXXXX,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
     KC_SCLN,      KC_Q,      KC_J,      KC_K,      KC_X,   XXXXXXX,   XXXXXXX,      KC_B,      KC_M,      KC_W,      KC_V,      KC_Z,
     XXXXXXX,   XXXXXXX,   FN_RALT,   KC_LCTL,    FN_DK2,   XXXXXXX,   XXXXXXX,   KC_LALT,    KC_SPC,   KC_RSFT,   XXXXXXX,   XXXXXXX
@@ -118,14 +132,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,   XXXXXXX,   XXXXXXX,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
      KC_TAB,   KC_COMM,    KC_DOT,   KC_UNDS,   KC_MINS,   XXXXXXX,   XXXXXXX,   KC_PIPE,   KC_SLSH,   KC_PLUS,   KC_QUES,   KC_BSPC,
      KC_ESC,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   XXXXXXX,      KC_B,   KC_BSLS,    KC_EQL,   XXXXXXX,    KC_ENT,
-    XXXXXXX,   XXXXXXX,   KC_LGUI,   KC_LCTL,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LGUI,    KC_SPC,   KC_RSFT,   XXXXXXX,   XXXXXXX
+    XXXXXXX,   XXXXXXX,   KC_LGUI,   KC_LCTL,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LALT,    KC_SPC,   KC_RSFT,   XXXXXXX,   XXXXXXX
   ),
 
   [FUNCTIONS] = LAYOUT_plaid_grid(
       KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,   XXXXXXX,   XXXXXXX,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
     KC_CLCK,   KC_SLCK,   KC_VOLU,   KC_MUTE,    KC_F11,   XXXXXXX,   XXXXXXX,    KC_F12,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,
       RESET,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT,
-    XXXXXXX,   XXXXXXX,   KC_LGUI,   KC_LCTL,   XXXXXXX,   XXXXXXX,   XXXXXXX,   FN_LGAL,    KC_SPC,   KC_RSFT,   XXXXXXX,   XXXXXXX
+    XXXXXXX,   XXXXXXX,   KC_LGUI,   KC_LCTL,   XXXXXXX,   XXXXXXX,   XXXXXXX,   FN_LALT,    KC_SPC,   KC_RSFT,   XXXXXXX,   XXXXXXX
   ),
 
   [RALTS] = LAYOUT_plaid_grid(
