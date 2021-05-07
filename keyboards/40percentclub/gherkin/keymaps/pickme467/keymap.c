@@ -74,13 +74,13 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   case FN_P:
   case FN_G:
     // GUI
-    return TAPPING_TERM * 3;
+    return TAPPING_TERM * 2;
   case FN_COMM:
   case FN_DOT:
   case FN_C:
   case FN_R:
     // ALT, CTRL
-    return TAPPING_TERM * 3;
+    return TAPPING_TERM * 2;
   default:
     return TAPPING_TERM;
   }
