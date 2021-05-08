@@ -71,19 +71,45 @@ qk_tap_dance_action_t tap_dance_actions[] =
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    // GUI
   case FN_P:
   case FN_G:
-    // GUI
-    return TAPPING_TERM * 2;
+		// ALT, CTRL
   case FN_COMM:
   case FN_DOT:
   case FN_C:
   case FN_R:
-    // ALT, CTRL
     return TAPPING_TERM * 2;
   default:
     return TAPPING_TERM;
   }
+}
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t* record) {
+	switch (keycode) {
+	case FN_J:
+		return true;
+	default:
+		return false;
+	}
+}
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+	switch (keycode) {
+	case FN_J:
+		return true;
+	default:
+		return false;
+	}
+}
+
+bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+	switch (keycode) {
+	case FN_J:
+		return true;
+	default:
+		return false;
+	}
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
