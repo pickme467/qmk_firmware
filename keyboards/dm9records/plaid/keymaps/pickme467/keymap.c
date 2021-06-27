@@ -65,9 +65,13 @@ void lalt_shift_finish(qk_tap_dance_state_t* state, void* user_data) {
 	case 1:
 		register_code(KC_LALT);
 		break;
-	default:
+	case 2:
 		register_code(KC_RSFT);
 		register_code(KC_LALT);
+		break;
+	default:
+		register_code(KC_LALT);
+		register_code(KC_LGUI);
 		break;
 	}
 }
@@ -77,9 +81,13 @@ void lalt_shift_reset(qk_tap_dance_state_t* state, void* user_data) {
 	case 1:
 		unregister_code(KC_LALT);
 		break;
-	default:
+	case 2:
 		unregister_code(KC_RSFT);
 		unregister_code(KC_LALT);
+		break;
+	default:
+		unregister_code(KC_LALT);
+		unregister_code(KC_LGUI);
 		break;
 	}
 }
