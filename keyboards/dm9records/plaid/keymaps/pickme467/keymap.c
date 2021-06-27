@@ -104,10 +104,6 @@ void shift_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
 		register_code(KC_RSFT);
 		register_code(KC_LGUI);
 		break;
-	case 4:
-		register_code(KC_LALT);
-		register_code(KC_LGUI);
-		break;
 	default:
 		register_code(KC_LALT);
 		register_code(KC_RSFT);
@@ -126,10 +122,6 @@ void shift_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
 		break;
 	case 3:
 		unregister_code(KC_RSFT);
-		unregister_code(KC_LGUI);
-		break;
-	case 4:
-		unregister_code(KC_LALT);
 		unregister_code(KC_LGUI);
 		break;
 	default:
