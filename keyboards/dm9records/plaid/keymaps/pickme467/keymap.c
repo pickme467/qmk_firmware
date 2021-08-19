@@ -1,17 +1,18 @@
 #include QMK_KEYBOARD_H
 
 enum {
-      BASE = 0,
-      NUMBERS,
-      RALTS,
-      FUNCTIONS,
+  BASE = 0,
+  NUMBERS,
+  RALTS,
+  FUNCTIONS,
 };
 
 enum {
-	UPPER_LOWER_MOD = 0,
-	RALT_GUI_MOD,
-	LALT_SHIFT_MOD,
-	SHIFT_GUI_MOD,
+  UPPER_LOWER_MOD = 0,
+  RALT_GUI_MOD,
+  LALT_SHIFT_MOD,
+  SHIFT_GUI_MOD,
+  CTRL_UPPER_LOWER_MOD,
 };
 
 void layer_reset(void) {
@@ -20,17 +21,13 @@ void layer_reset(void) {
 }
 
 void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
-  if (state->pressed) {
-    switch (state->count) {
-    case 1:
-      layer_on(NUMBERS);
-      break;
-    default:
-      layer_on(FUNCTIONS);
-      break;
-    }
-  } else {
-    layer_reset();
+  switch (state->count) {
+  case 1:
+    layer_on(NUMBERS);
+    break;
+  default:
+    layer_on(FUNCTIONS);
+    break;
   }
 }
 
@@ -38,122 +35,141 @@ void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
   layer_reset();
 }
 
+void ctrl_upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
+  register_code(KC_LCTL);
+  switch (state->count) {
+  case 1:
+    break;
+  case 2:
+    layer_on(NUMBERS);
+    break;
+  default:
+    layer_on(FUNCTIONS);
+    break;
+  }
+}
+
+void ctrl_upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
+  unregister_code(KC_LCTL);
+  layer_reset();
+}
+
 void ralt_ctrl_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
-	switch (state->count) {
-	case 1:
-		layer_on(RALTS);
-		break;
-	case 2:
-		layer_on(RALTS);
-		register_code(KC_LCTL);
-		break;
-	default:
-		register_code(KC_LGUI);
-		break;
-	}
+  switch (state->count) {
+  case 1:
+    layer_on(RALTS);
+    break;
+  case 2:
+    layer_on(RALTS);
+    register_code(KC_LCTL);
+    break;
+  default:
+    register_code(KC_LGUI);
+    break;
+  }
 }
 
 void ralt_ctrl_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
-	switch (state->count) {
-	case 1:
-		layer_off(RALTS);
-		break;
-	case 2:
-		unregister_code(KC_LCTL);
-		layer_off(RALTS);
-		break;
-	default:
-		unregister_code(KC_LGUI);
-		break;
-	}
+  switch (state->count) {
+  case 1:
+    layer_off(RALTS);
+    break;
+  case 2:
+    unregister_code(KC_LCTL);
+    layer_off(RALTS);
+    break;
+  default:
+    unregister_code(KC_LGUI);
+    break;
+  }
 }
 
 void lalt_shift_finish(qk_tap_dance_state_t* state, void* user_data) {
-	switch (state->count) {
-	case 1:
-		register_code(KC_LALT);
-		break;
-	case 2:
-		register_code(KC_RSFT);
-		register_code(KC_LALT);
-		break;
-	default:
-		register_code(KC_LALT);
-		register_code(KC_LGUI);
-		break;
-	}
+  switch (state->count) {
+  case 1:
+    register_code(KC_LALT);
+    break;
+  case 2:
+    register_code(KC_RSFT);
+    register_code(KC_LALT);
+    break;
+  default:
+    register_code(KC_LALT);
+    register_code(KC_LGUI);
+    break;
+  }
 }
 
 void lalt_shift_reset(qk_tap_dance_state_t* state, void* user_data) {
-	switch (state->count) {
-	case 1:
-		unregister_code(KC_LALT);
-		break;
-	case 2:
-		unregister_code(KC_RSFT);
-		unregister_code(KC_LALT);
-		break;
-	default:
-		unregister_code(KC_LALT);
-		unregister_code(KC_LGUI);
-		break;
-	}
+  switch (state->count) {
+  case 1:
+    unregister_code(KC_LALT);
+    break;
+  case 2:
+    unregister_code(KC_RSFT);
+    unregister_code(KC_LALT);
+    break;
+  default:
+    unregister_code(KC_LALT);
+    unregister_code(KC_LGUI);
+    break;
+  }
 }
 
 void shift_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
-	switch (state->count) {
-	case 1:
-		register_code(KC_RSFT);
-		break;
-	case 2:
-		register_code(KC_LGUI);
-		break;
-	case 3:
-		register_code(KC_RSFT);
-		register_code(KC_LGUI);
-		break;
-	default:
-		register_code(KC_LALT);
-		register_code(KC_RSFT);
-		register_code(KC_LGUI);
-		break;
-	}
+  switch (state->count) {
+  case 1:
+    register_code(KC_RSFT);
+    break;
+  case 2:
+    register_code(KC_LGUI);
+    break;
+  case 3:
+    register_code(KC_RSFT);
+    register_code(KC_LGUI);
+    break;
+  default:
+    register_code(KC_LALT);
+    register_code(KC_RSFT);
+    register_code(KC_LGUI);
+    break;
+  }
 }
 
 void shift_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
-	switch (state->count) {
-	case 1:
-		unregister_code(KC_RSFT);
-		break;
-	case 2:
-		unregister_code(KC_LGUI);
-		break;
-	case 3:
-		unregister_code(KC_RSFT);
-		unregister_code(KC_LGUI);
-		break;
-	default:
-		unregister_code(KC_LALT);
-		unregister_code(KC_RSFT);
-		unregister_code(KC_LGUI);
-		break;
-	}
+  switch (state->count) {
+  case 1:
+    unregister_code(KC_RSFT);
+    break;
+  case 2:
+    unregister_code(KC_LGUI);
+    break;
+  case 3:
+    unregister_code(KC_RSFT);
+    unregister_code(KC_LGUI);
+    break;
+  default:
+    unregister_code(KC_LALT);
+    unregister_code(KC_RSFT);
+    unregister_code(KC_LGUI);
+    break;
+  }
 }
 
 qk_tap_dance_action_t tap_dance_actions[] =
   {
-		[UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_finish, upper_lower_reset, 275),
-		[RALT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ralt_ctrl_gui_finish, ralt_ctrl_gui_reset, 275),
-		[LALT_SHIFT_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lalt_shift_finish, lalt_shift_reset, 275),
-		[SHIFT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shift_gui_finish, shift_gui_reset, 275)
+    [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_finish, upper_lower_reset, 275),
+    [RALT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ralt_ctrl_gui_finish, ralt_ctrl_gui_reset, 275),
+    [LALT_SHIFT_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lalt_shift_finish, lalt_shift_reset, 275),
+    [SHIFT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shift_gui_finish, shift_gui_reset, 275),
+    [CTRL_UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ctrl_upper_lower_finish, ctrl_upper_lower_reset, 275)
   };
 
-#define FN_DK2 TD(UPPER_LOWER_MOD)
+#define TD_LAYR TD(UPPER_LOWER_MOD)
 #define TD_RALT TD(RALT_GUI_MOD)
 #define TD_LALT TD(LALT_SHIFT_MOD)
 #define TD_RSFT TD(SHIFT_GUI_MOD)
-
-#define FN_LGAL LALT(KC_LGUI)
+#define TD_LCTL TD(CTRL_UPPER_LOWER_MOD)
 
 #define FNRA_A RALT(KC_A)
 #define FNRA_C RALT(KC_C)
@@ -172,13 +188,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_QUOT,   KC_COMM,    KC_DOT,      KC_P,      KC_Y,   XXXXXXX,   XXXXXXX,      KC_F,      KC_G,      KC_C,      KC_R,      KC_L,
        KC_A,      KC_O,      KC_E,      KC_U,      KC_I,   XXXXXXX,   XXXXXXX,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
     KC_SCLN,      KC_Q,      KC_J,      KC_K,      KC_X,   XXXXXXX,   XXXXXXX,      KC_B,      KC_M,      KC_W,      KC_V,      KC_Z,
-    XXXXXXX,   XXXXXXX,   TD_RALT,   KC_LCTL,    FN_DK2,   KC_LGUI,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
+    XXXXXXX,   XXXXXXX,   TD_RALT,   TD_LCTL,   TD_LAYR,   KC_LGUI,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
   ),
 
   [NUMBERS] = LAYOUT_plaid_grid(
        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,   XXXXXXX,   XXXXXXX,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
      KC_TAB,   KC_COMM,    KC_DOT,   KC_UNDS,   KC_MINS,   XXXXXXX,   XXXXXXX,   KC_PIPE,   KC_SLSH,   KC_PLUS,   KC_QUES,   KC_BSPC,
-     KC_ESC,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   XXXXXXX,      KC_B,   KC_BSLS,    KC_EQL,   XXXXXXX,    KC_ENT,
+     KC_ESC,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RCTL,   KC_BSLS,    KC_EQL,   XXXXXXX,    KC_ENT,
     XXXXXXX,   XXXXXXX,   KC_LGUI,   KC_LCTL,   XXXXXXX,   KC_LGUI,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
   ),
 
@@ -255,7 +271,7 @@ const uint16_t modifiers[] = {
     KC_RSFT,
     KC_LGUI,
     KC_RGUI,
-    FN_DK2,
+    TD_LAYR,
     TD_RALT
 };
 
