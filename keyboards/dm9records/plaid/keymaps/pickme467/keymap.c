@@ -38,10 +38,14 @@ void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
   layer_reset();
 }
 
-void ralt_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
+void ralt_ctrl_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
 	switch (state->count) {
 	case 1:
 		layer_on(RALTS);
+		break;
+	case 2:
+		layer_on(RALTS);
+		register_code(KC_LCTL);
 		break;
 	default:
 		register_code(KC_LGUI);
@@ -49,9 +53,13 @@ void ralt_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
 	}
 }
 
-void ralt_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
+void ralt_ctrl_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
 	switch (state->count) {
 	case 1:
+		layer_off(RALTS);
+		break;
+	case 2:
+		unregister_code(KC_LCTL);
 		layer_off(RALTS);
 		break;
 	default:
@@ -135,7 +143,7 @@ void shift_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
 qk_tap_dance_action_t tap_dance_actions[] =
   {
 		[UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_finish, upper_lower_reset, 275),
-		[RALT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ralt_gui_finish, ralt_gui_reset, 275),
+		[RALT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ralt_ctrl_gui_finish, ralt_ctrl_gui_reset, 275),
 		[LALT_SHIFT_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lalt_shift_finish, lalt_shift_reset, 275),
 		[SHIFT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shift_gui_finish, shift_gui_reset, 275)
   };
