@@ -21,13 +21,17 @@ void layer_reset(void) {
 }
 
 void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
-  switch (state->count) {
-  case 1:
-    layer_on(NUMBERS);
-    break;
-  default:
-    layer_on(FUNCTIONS);
-    break;
+  if (state->pressed) {
+    switch (state->count) {
+    case 1:
+      layer_on(NUMBERS);
+      break;
+    default:
+      layer_on(FUNCTIONS);
+      break;
+    }
+  } else {
+    layer_reset();
   }
 }
 
@@ -36,16 +40,21 @@ void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
 }
 
 void ctrl_upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
-  register_code(KC_LCTL);
-  switch (state->count) {
-  case 1:
-    break;
-  case 2:
-    layer_on(NUMBERS);
-    break;
-  default:
-    layer_on(FUNCTIONS);
-    break;
+  if (state->pressed) {
+    register_code(KC_LCTL);
+    switch (state->count) {
+    case 1:
+      break;
+    case 2:
+      layer_on(NUMBERS);
+      break;
+    default:
+      layer_on(FUNCTIONS);
+      break;
+    }
+  } else {
+    unregister_code(KC_LCTL);
+    layer_reset();
   }
 }
 
