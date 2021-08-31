@@ -21,17 +21,13 @@ void layer_reset(void) {
 }
 
 void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
-  if (state->pressed) {
-    switch (state->count) {
-    case 1:
-      layer_on(NUMBERS);
-      break;
-    default:
-      layer_on(FUNCTIONS);
-      break;
-    }
-  } else {
-    layer_reset();
+  switch (state->count) {
+  case 1:
+    layer_on(NUMBERS);
+    break;
+  default:
+    layer_on(FUNCTIONS);
+    break;
   }
 }
 
@@ -40,27 +36,22 @@ void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
 }
 
 void ctrl_upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
-  if (state->pressed) {
-    register_code(KC_LCTL);
-    switch (state->count) {
-    case 1:
-      break;
-    case 2:
-      layer_on(NUMBERS);
-      break;
-    default:
-      layer_on(FUNCTIONS);
-      break;
-    }
-  } else {
-    unregister_code(KC_LCTL);
-    layer_reset();
+  register_code(KC_LCTL);
+  switch (state->count) {
+  case 1:
+    break;
+  case 2:
+    layer_on(NUMBERS);
+    break;
+  default:
+    layer_on(FUNCTIONS);
+    break;
   }
 }
 
 void ctrl_upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
-  unregister_code(KC_LCTL);
   layer_reset();
+  unregister_code(KC_LCTL);
 }
 
 void ralt_ctrl_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
@@ -204,21 +195,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_1,      KC_2,      KC_3,      KC_4,      KC_5,   XXXXXXX,   XXXXXXX,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
      KC_TAB,   KC_COMM,    KC_DOT,   KC_UNDS,   KC_MINS,   XXXXXXX,   XXXXXXX,   KC_PIPE,   KC_SLSH,   KC_PLUS,   KC_QUES,   KC_BSPC,
      KC_ESC,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RCTL,   KC_BSLS,    KC_EQL,   XXXXXXX,    KC_ENT,
-    XXXXXXX,   XXXXXXX,   KC_LGUI,   KC_LCTL,   XXXXXXX,   KC_LGUI,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
   ),
 
   [FUNCTIONS] = LAYOUT_plaid_grid(
       KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,   XXXXXXX,   XXXXXXX,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
     KC_CLCK,   KC_SLCK,   KC_VOLU,   KC_MUTE,    KC_F11,   XXXXXXX,   XXXXXXX,    KC_F12,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,
       RESET,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT,
-    XXXXXXX,   XXXXXXX,   KC_LGUI,   KC_LCTL,   XXXXXXX,   KC_LGUI,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
   ),
 
   [RALTS] = LAYOUT_plaid_grid(
   KC_INSERT,    KC_GRV,   KC_TILD,   KC_LBRC,     KC_LT,   XXXXXXX,   XXXXXXX,     KC_GT,   KC_RBRC,    FNRA_C,    XXXXXXX,    FNRA_L,
      FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,   KC_LCBR,   XXXXXXX,   XXXXXXX,   KC_RCBR,   KC_RPRN,     KC_UP,     FNRA_N,    FNRA_S,
   KC_DELETE,     SUPER,   KC_LSFT,     HYPER,    FNRA_X,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LEFT,   KC_DOWN,   KC_RIGHT,    FNRA_Z,
-    XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LCTL,   KC_LGUI,   KC_LGUI,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,    XXXXXXX,   XXXXXXX
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,    XXXXXXX,   XXXXXXX
   )
 };
 
