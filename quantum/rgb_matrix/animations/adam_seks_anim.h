@@ -22,7 +22,7 @@ bool ADAM_SEKS(effect_params_t* params) {
       if (is_keyboard_master()) {
         if (time % 100 == 0) {
           step++;
-          if(step > sizeof(text)) step = 0;
+          if(step >= sizeof(text)) step = 0;
         }
       }
       return false;
