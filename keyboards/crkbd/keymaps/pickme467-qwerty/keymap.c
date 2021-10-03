@@ -17,7 +17,7 @@ enum {
 
 enum my_keycodes {
 	KCM_PAR = SAFE_RANGE
-}
+};
 
 void layer_reset(void) {
   layer_off(NUMBERS);
@@ -160,10 +160,6 @@ void shift_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void paragraph() {
-	SEND_STRING("§");
-}
-
 qk_tap_dance_action_t tap_dance_actions[] =
   {
     [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_finish, upper_lower_reset, 275),
@@ -191,34 +187,33 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define HYPER KC_F9
 #define SUPER KC_F8
 
-KC_QUOT
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT( \
       RGB_HUD,      KC_Q,      KC_W,      KC_E,      KC_R,      KC_T,             KC_Y,      KC_U,      KC_I,    KC_O,      KC_P,   RGB_HUI,\
       RGB_SPD,      KC_A,      KC_S,      KC_D,      KC_F,      KC_G,             KC_H,      KC_J,      KC_K,    KC_L,   KC_SCLN,   RGB_SPI,\
       RGB_SAD,      KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,             KC_N,      KC_M,   KC_COMM,  KC_DOT,   KC_SLSH,   RGB_SAI,\
-                                       TD_RALT,   TD_LCTL,   TD_LAYR,          TD_LALT,    KC_SPC,   TD_RSFT\
+                                       TD_RSFT,    KC_SPC,   TD_LALT,          TD_LAYR,   TD_LCTL,   TD_RALT\
   ),
 
   [NUMBERS] = LAYOUT( \
-      RGB_VAD,    KC_TAB,   KC_UNDS,   KC_MINS,   XXXXXXX,   XXXXXXX,          KC_PIPE,   XXXXXXX,   KC_PLUS,   KC_QUES,   KC_BSPC,   RGB_VAI,\
+      RGB_VAD,    KC_TAB,   KC_BSLS,    KC_GRV,   KC_PLUS,   KC_LBRC,          KC_RBRC,   KC_MINS,   XXXXXXX,   XXXXXXX,   KC_BSPC,   RGB_VAI,\
      RGB_RMOD,      KC_1,      KC_2,      KC_3,      KC_4,      KC_5,             KC_6,      KC_7,      KC_8,      KC_9,      KC_0,   RGB_MOD,\
-      RGB_TOG,    KC_ESC,   XXXXXXX,   KC_COMM,    KC_DOT,   XXXXXXX,          KC_RCTL,   KC_BSLS,    KC_EQL,   XXXXXXX,    KC_ENT,   RGB_TOG,\
-                                       XXXXXXX,   XXXXXXX,   XXXXXXX,          TD_LALT,    KC_SPC,   TD_RSFT\
+      RGB_TOG,    KC_ESC,   KC_PIPE,   KC_TILD,    KC_EQL,   KC_LCBR,          KC_RCBR,   KC_UNDS,   KC_COMM,    KC_DOT,    KC_ENT,   RGB_TOG,\
+                                       TD_RSFT,    KC_SPC,   TD_LALT,          XXXXXXX,   XXXXXXX,   XXXXXXX\
   ),
 
   [FUNCTIONS] = LAYOUT( \
       XXXXXXX,     KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,            KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,   XXXXXXX,\
       XXXXXXX,   KC_CLCK,   KC_SLCK,   KC_VOLU,   KC_MUTE,    KC_F11,           KC_F12,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
-      EEP_RST,     RESET,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,          XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT,   XXXXXXX,\
-                                       XXXXXXX,   XXXXXXX,   XXXXXXX,          TD_LALT,    KC_SPC,   TD_RSFT\
+      EEP_RST,     RESET,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,          XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,   XXXXXXX,   XXXXXXX,\
+                                       TD_RSFT,    KC_SPC,   TD_LALT,          XXXXXXX,   XXXXXXX,   XXXXXXX\
   ),
 
   [RALTS] = LAYOUT( \
-      XXXXXXX,   XXXXXXX,    KC_GRV,    FNRA_E,   XXXXXXX,   XXXXXXX,          XXXXXXX,   XXXXXXX,   XXXXXXX,    FNRA_O, KC_INSERT,   XXXXXXX,\
-      XXXXXXX,    FNRA_A,    FNRA_S,   KC_TILD,   KCM_PAR,   XXXXXXX,          XXXXXXX,   XXXXXXX,     KC_UP,   XXXXXXX,    FNRA_L,   XXXXXXX,\
-      XXXXXXX,    FNRA_Z,    FNRA_X,    FNRA_C,   XXXXXXX,   XXXXXXX,           FNRA_N,   KC_LEFT,   KC_DOWN,  KC_RIGHT, KC_DELETE,   XXXXXXX,\
-                                       XXXXXXX,   XXXXXXX,   XXXXXXX,          TD_LALT,    KC_SPC,   TD_RSFT\
+      XXXXXXX,   XXXXXXX,   XXXXXXX,    FNRA_E,   XXXXXXX,   XXXXXXX,          XXXXXXX,   XXXXXXX,   XXXXXXX,    FNRA_O, KC_DELETE,   XXXXXXX,\
+      XXXXXXX,    FNRA_A,    FNRA_S,   XXXXXXX,   KCM_PAR,   XXXXXXX,          XXXXXXX,   XXXXXXX,     KC_UP,    FNRA_L,   KC_QUOT,   XXXXXXX, \
+      XXXXXXX,    FNRA_Z,    FNRA_X,    FNRA_C,   XXXXXXX,   XXXXXXX,           FNRA_N,   KC_LEFT,   KC_DOWN,  KC_RIGHT, KC_INSERT,   XXXXXXX,\
+                                       TD_RSFT,    KC_SPC,   TD_LALT,          XXXXXXX,   XXXXXXX,   XXXXXXX\
   )
 };
 
@@ -258,50 +253,8 @@ void oled_render_layer_state(void) {
 
 char keylog_str[24] = {};
 
-const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
-
-void set_keylog(uint16_t keycode, keyrecord_t *record) {
-  char name = ' ';
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
-        (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
-  if (keycode < 60) {
-    name = code_to_name[keycode];
-  }
-
-  // update keylog
-  snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
-           record->event.key.row, record->event.key.col,
-           keycode, name);
-}
-
-void oled_render_keylog(void) {
-    oled_write(keylog_str, false);
-}
-
-void render_bootmagic_status(bool status) {
-    /* Show Ctrl-Gui Swap options */
-    static const char PROGMEM logo[][2][3] = {
-        {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
-        {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
-    };
-    if (status) {
-        oled_write_ln_P(logo[0][0], false);
-        oled_write_ln_P(logo[0][1], false);
-    } else {
-        oled_write_ln_P(logo[1][0], false);
-        oled_write_ln_P(logo[1][1], false);
-    }
-}
-
 void oled_task_user(void) {
   oled_render_layer_state();
-  oled_render_keylog();
 }
 
 uint8_t step = 0;
@@ -310,8 +263,11 @@ uint8_t old_step = 0;
 #include<transactions.h>
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    set_keylog(keycode, record);
+  if ((record->event.pressed) && (keycode == KCM_PAR)) {
+    register_code(KC_LALT);
+    register_code(KC_6);
+    unregister_code(KC_6);
+    unregister_code(KC_LALT);
   }
   return true;
 }
