@@ -183,6 +183,7 @@ qk_tap_dance_action_t tap_dance_actions[] =
 #define HYPER KC_F9
 #define SUPER KC_F8
 
+#define FN_AST LSFT(KC_8)
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_plaid_grid(
     KC_QUOT,   KC_COMM,    KC_DOT,      KC_P,      KC_Y,   XXXXXXX,   XXXXXXX,      KC_F,      KC_G,      KC_C,      KC_R,      KC_L,
@@ -192,9 +193,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [NUMBERS] = LAYOUT_plaid_grid(
-       KC_1,      KC_2,      KC_3,      KC_4,      KC_5,   XXXXXXX,   XXXXXXX,      KC_6,      KC_7,      KC_8,      KC_9,      KC_0,
-     KC_TAB,   KC_COMM,    KC_DOT,   KC_UNDS,   KC_MINS,   XXXXXXX,   XXXXXXX,   KC_PIPE,   KC_SLSH,   KC_PLUS,   KC_QUES,   KC_BSPC,
-     KC_ESC,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RCTL,   KC_BSLS,    KC_EQL,   XXXXXXX,    KC_ENT,
+    KC_BSLS,   KC_COMM,    KC_DOT,   KC_SLSH,    FN_AST,   XXXXXXX,   XXXXXXX,   KC_PIPE,      KC_1,      KC_2,      KC_3,      KC_0,
+     KC_TAB,    KC_EQL,   KC_PLUS,   KC_UNDS,   KC_MINS,   XXXXXXX,   XXXXXXX,   KC_QUES,      KC_4,      KC_5,      KC_6,   KC_BSPC,
+     KC_ESC,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RCTL,      KC_7,      KC_8,      KC_9,    KC_ENT,
     XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
   ),
 
