@@ -193,8 +193,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [NUMBERS] = LAYOUT_plaid_grid(
-    KC_BSLS,   KC_COMM,    KC_DOT,    FN_AST,   KC_PIPE,   XXXXXXX,   XXXXXXX,   KC_SLSH,      KC_1,      KC_2,      KC_3,      KC_0,
-     KC_TAB,    KC_EQL,   KC_PLUS,   KC_UNDS,   KC_MINS,   XXXXXXX,   XXXXXXX,   KC_QUES,      KC_4,      KC_5,      KC_6,   KC_BSPC,
+    KC_BSLS,   KC_COMM,    KC_DOT,    FN_AST,   KC_PIPE,   XXXXXXX,   XXXXXXX,   KC_QUES,      KC_1,      KC_2,      KC_3,      KC_0,
+     KC_TAB,    KC_EQL,   KC_PLUS,   KC_UNDS,   KC_MINS,   XXXXXXX,   XXXXXXX,   KC_SLSH,      KC_4,      KC_5,      KC_6,   KC_BSPC,
      KC_ESC,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RCTL,      KC_7,      KC_8,      KC_9,    KC_ENT,
     XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
   ),
