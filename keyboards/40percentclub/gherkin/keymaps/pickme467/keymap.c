@@ -5,15 +5,25 @@ enum {
       NUMBERS,
       RALTS,
       FUNCTIONS,
+      STRINGS,
 };
 
 enum {
       UPPER_LOWER_MOD = 0,
 };
 
+enum custom_keycodes {
+      MC_SU1 = SAFE_RANGE,
+      MC_ROOT,
+};
+
+#define xstr(s) str(s)
+#define str(s) #s
+
 void layer_reset(void) {
   layer_off(NUMBERS);
   layer_off(FUNCTIONS);
+  layer_off(STRINGS);
 }
 
 void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
@@ -22,9 +32,12 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
     case 1:
       layer_on(NUMBERS);
       break;
-    default:
+    case 2:
       layer_on(FUNCTIONS);
-       break;
+      break;
+    default:
+      layer_on(STRINGS);
+      break;
     }
   } else {
     layer_reset();
@@ -139,6 +152,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       RESET,   XXXXXXX,   KC_VOLD,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT
   ),
 
+  [STRINGS] = LAYOUT_ortho_3x10(
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX
+  ),
+
 };
 
 void keyboard_pre_init_user(void) {
@@ -161,4 +180,20 @@ void led_set_user(uint8_t usb_led) {
   } else {
     writePinHigh(B0);
   }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+    switch (keycode) {
+    case MC_SU1:
+      SEND_STRING(xstr(D_SU1)SS_TAP(X_ENT));
+      break;
+    case MC_ROOT:
+      SEND_STRING(xstr(D_ROOT)SS_TAP(X_ENT));
+      break;
+    default:
+      break;
+    }
+  }
+  return true;
 }

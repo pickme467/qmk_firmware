@@ -5,6 +5,7 @@ enum {
   NUMBERS,
   RALTS,
   FUNCTIONS,
+  STRINGS,
 };
 
 enum {
@@ -15,9 +16,18 @@ enum {
   CTRL_UPPER_LOWER_MOD,
 };
 
+enum custom_keycodes {
+      MC_SU1 = SAFE_RANGE,
+      MC_ROOT,
+};
+
+#define xstr(s) str(s)
+#define str(s) #s
+
 void layer_reset(void) {
   layer_off(NUMBERS);
   layer_off(FUNCTIONS);
+  layer_off(STRINGS);
 }
 
 void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
@@ -25,8 +35,11 @@ void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
   case 1:
     layer_on(NUMBERS);
     break;
-  default:
+  case 2:
     layer_on(FUNCTIONS);
+    break;
+  default:
+    layer_on(STRINGS);
     break;
   }
 }
@@ -205,12 +218,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_CLCK,   KC_SLCK,   KC_VOLU,   KC_MUTE,    KC_F11,          KC_F12,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,\
         RESET,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,         XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT,\
                             XXXXXXX,   XXXXXXX,   XXXXXXX,         TD_LALT,    KC_SPC,   TD_RSFT\
- ),
+  ),
 
   [RALTS] = LAYOUT( \
     KC_INSERT,    KC_GRV,   KC_TILD,   KC_LBRC,     KC_LT,           KC_GT,   KC_RBRC,    FNRA_C,   XXXXXXX,    FNRA_L,\
        FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,   KC_LCBR,         KC_RCBR,   KC_RPRN,     KC_UP,    FNRA_N,    FNRA_S,\
     KC_DELETE,     SUPER,   KC_LSFT,     HYPER,    FNRA_X,         XXXXXXX,   KC_LEFT,   KC_DOWN,  KC_RIGHT,    FNRA_Z,\
                             XXXXXXX,   XXXXXXX,   XXXXXXX,         TD_LALT,    KC_SPC,   TD_RSFT\
+  ),
+
+  [STRINGS] = LAYOUT( \
+    XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
+    XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX,   XXXXXXX,         XXXXXXX,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
+    XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX,   XXXXXXX,         XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
+                            XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   XXXXXXX\
   )
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+    switch (keycode) {
+    case MC_SU1:
+      SEND_STRING(xstr(D_SU1)SS_TAP(X_ENT));
+      break;
+    case MC_ROOT:
+      SEND_STRING(xstr(D_ROOT)SS_TAP(X_ENT));
+      break;
+    default:
+      break;
+    }
+  }
+  return true;
+}

@@ -5,6 +5,7 @@ enum {
   NUMBERS,
   RALTS,
   FUNCTIONS,
+  STRINGS,
 };
 
 enum {
@@ -15,9 +16,18 @@ enum {
   CTRL_UPPER_LOWER_MOD,
 };
 
+enum custom_keycodes {
+  MC_SU1 = SAFE_RANGE,
+  MC_ROOT,
+};
+
+#define xstr(s) str(s)
+#define str(s) #s
+
 void layer_reset(void) {
   layer_off(NUMBERS);
   layer_off(FUNCTIONS);
+  layer_off(STRINGS);
 }
 
 void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
@@ -25,8 +35,11 @@ void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
   case 1:
     layer_on(NUMBERS);
     break;
-  default:
+  case 2:
     layer_on(FUNCTIONS);
+    break;
+  default:
+    layer_on(STRINGS);
     break;
   }
 }
@@ -211,6 +224,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,   KC_LCBR,   XXXXXXX,   XXXXXXX,   KC_RCBR,   KC_RPRN,     KC_UP,     FNRA_N,    FNRA_S,
   KC_DELETE,     SUPER,   KC_LSFT,     HYPER,    FNRA_X,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LEFT,   KC_DOWN,   KC_RIGHT,    FNRA_Z,
     XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_RGUI,   TD_LALT,    KC_SPC,   TD_RSFT,    XXXXXXX,   XXXXXXX
+  ),
+
+  [STRINGS] = LAYOUT_plaid_grid(
+  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,    XXXXXXX,   XXXXXXX,
+  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,    MC_SU1,   XXXXXXX,    XXXXXXX,   XXXXXXX,
+  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   XXXXXXX,    XXXXXXX,   XXXXXXX,
+  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,    XXXXXXX,   XXXXXXX
   )
 };
 
@@ -334,6 +354,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   if (led_config.green_mode >= LEDMODE_MODS && led_config.green_mode <= LEDMODE_ENTER) {
       led_keypress_update(LED_GREEN, led_config.green_mode, keycode, record);
+  }
+  if (record->event.pressed) {
+    switch (keycode) {
+    case MC_SU1:
+      SEND_STRING(xstr(D_SU1)SS_TAP(X_ENT));
+      break;
+    case MC_ROOT:
+      SEND_STRING(xstr(D_ROOT)SS_TAP(X_ENT));
+      break;
+    default:
+      break;
+    }
   }
   return true;
 }
