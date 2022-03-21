@@ -214,8 +214,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FUNCTIONS] = LAYOUT( \
-        KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,           KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,\
-      KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,    KC_F11,          KC_F12,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,\
+      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
+      KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,\
         RESET,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT,\
                             XXXXXXX,   XXXXXXX,   XXXXXXX,         TD_LALT,    KC_SPC,   TD_RSFT\
   ),
@@ -228,8 +228,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [STRINGS] = LAYOUT( \
-    XXXXXXX,   XXXXXXX,   XXXXXXX,     XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
-    XXXXXXX,   XXXXXXX,   KC_VOLU,     KC_MUTE,   XXXXXXX,         XXXXXXX,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX, \
+        KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,           KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,\
+    XXXXXXX,   XXXXXXX,   KC_VOLU,     KC_MUTE,    KC_F11,          KC_F12,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX, \
     XXXXXXX,   XXXXXXX,   KC_VOLD,     XXXXXXX,   XXXXXXX,         XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
                             XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   XXXXXXX\
   )
