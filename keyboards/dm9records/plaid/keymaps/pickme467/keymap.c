@@ -24,12 +24,6 @@ enum custom_keycodes {
 #define xstr(s) str(s)
 #define str(s) #s
 
-void layer_reset(void) {
-  layer_off(NUMBERS);
-  layer_off(FUNCTIONS);
-  layer_off(STRINGS);
-}
-
 void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
@@ -45,7 +39,17 @@ void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
 }
 
 void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
-  layer_reset();
+  switch (state->count) {
+  case 1:
+    layer_off(NUMBERS);
+    break;
+  case 2:
+    layer_off(FUNCTIONS);
+    break;
+  default:
+    layer_off(STRINGS);
+    break;
+  }
 }
 
 void ctrl_upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
@@ -63,7 +67,16 @@ void ctrl_upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
 }
 
 void ctrl_upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
-  layer_reset();
+  switch (state->count) {
+  case 1:
+    break;
+  case 2:
+    layer_off(NUMBERS);
+    break;
+  default:
+    layer_off(FUNCTIONS);
+    break;
+  }
   unregister_code(KC_LCTL);
 }
 
