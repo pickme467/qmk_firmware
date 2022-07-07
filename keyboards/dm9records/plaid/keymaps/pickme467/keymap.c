@@ -184,11 +184,11 @@ void shift_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
 
 qk_tap_dance_action_t tap_dance_actions[] =
   {
-    [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_finish, upper_lower_reset, 275),
-    [RALT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ralt_ctrl_gui_finish, ralt_ctrl_gui_reset, 275),
-    [LALT_SHIFT_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lalt_shift_finish, lalt_shift_reset, 275),
-    [SHIFT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, shift_gui_finish, shift_gui_reset, 275),
-    [CTRL_UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ctrl_upper_lower_finish, ctrl_upper_lower_reset, 275)
+    [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, upper_lower_finish, upper_lower_reset),
+    [RALT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ralt_ctrl_gui_finish, ralt_ctrl_gui_reset),
+    [LALT_SHIFT_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lalt_shift_finish, lalt_shift_reset),
+    [SHIFT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shift_gui_finish, shift_gui_reset),
+    [CTRL_UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctrl_upper_lower_finish, ctrl_upper_lower_reset)
   };
 
 #define TD_LAYR TD(UPPER_LOWER_MOD)

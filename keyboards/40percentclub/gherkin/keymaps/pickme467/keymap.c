@@ -4,8 +4,8 @@ enum {
       BASE = 0,
       NUMBERS,
       RALTS,
-      SWITCHES,
-      EXTRA,
+      FUNCTIONS,
+      STRINGS,
 };
 
 enum {
@@ -22,8 +22,8 @@ enum custom_keycodes {
 
 void layer_reset(void) {
   layer_off(NUMBERS);
-  layer_off(SWITCHES);
-  layer_off(EXTRA);
+  layer_off(FUNCTIONS);
+  layer_off(STRINGS);
 }
 
 void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
@@ -33,10 +33,10 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
       layer_on(NUMBERS);
       break;
     case 2:
-      layer_on(SWITCHES);
+      layer_on(FUNCTIONS);
       break;
     default:
-      layer_on(EXTRA);
+      layer_on(STRINGS);
       break;
     }
   } else {
@@ -54,8 +54,17 @@ void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
 
 qk_tap_dance_action_t tap_dance_actions[] =
   {
-   [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, upper_lower_function, upper_lower_reset, 275),
+   [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, upper_lower_function, upper_lower_reset),
   };
+
+#define FN_QUOT MT(MOD_LSFT, KC_QUOT)
+#define FN_COMM MT(MOD_LCTL, KC_COMM)
+#define FN_DOT MT(MOD_LALT, KC_DOT)
+#define FN_P MT(MOD_LGUI, KC_P)
+#define FN_G MT(MOD_RGUI, KC_G)
+#define FN_C MT(MOD_LALT, KC_C)
+#define FN_R MT(MOD_RCTL, KC_R)
+#define FN_L MT(MOD_RSFT, KC_L)
 
 #define FN_J LT(RALTS, KC_J)
 #define FN_X TD(UPPER_LOWER_MOD)
@@ -74,10 +83,58 @@ qk_tap_dance_action_t tap_dance_actions[] =
 
 #define FN_AST LSFT(KC_8)
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // GUI
+  case FN_P:
+  case FN_G:
+		// ALT
+  case FN_DOT:
+  case FN_C:
+    return TAPPING_TERM * 2;
+    // CTRL
+  case FN_COMM:
+  case FN_R:
+    return TAPPING_TERM * 12 / 10;
+    // TAP DANCE
+  case FN_X:
+    return 275;
+  default:
+    return TAPPING_TERM;
+  }
+}
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t* record) {
+	switch (keycode) {
+	case FN_J:
+		return true;
+	default:
+		return false;
+	}
+}
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+	switch (keycode) {
+	case FN_J:
+		return true;
+	default:
+		return false;
+	}
+}
+
+bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+	switch (keycode) {
+	case FN_J:
+		return true;
+	default:
+		return false;
+	}
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [BASE] = LAYOUT_ortho_3x10(
-    KC_QUOT,   KC_COMM,    KC_DOT,      KC_P,      KC_Y,      KC_F,      KC_G,      KC_C,      KC_R,      KC_L,
+    FN_QUOT,   FN_COMM,    FN_DOT,      FN_P,      KC_Y,      KC_F,      FN_G,      FN_C,      FN_R,      FN_L,
        KC_A,      KC_O,      KC_E,      KC_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
     KC_SCLN,      KC_Q,      FN_J,      KC_K,      FN_X,    KC_SPC,      KC_M,      KC_W,      KC_V,      KC_Z
   ),
@@ -94,16 +151,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_DELETE,     SUPER,   XXXXXXX,     HYPER,    FNRA_X,      KC_B,   KC_LEFT,   KC_DOWN,   KC_RIGHT,    FNRA_Z
   ),
 
-  [SWITCHES] = LAYOUT_ortho_3x10(
-    KC_LSFT,   KC_LCTL,   KC_LALT,   KC_LGUI,   XXXXXXX,   XXXXXXX,   KC_RGUI,   KC_LALT,   KC_RCTL,   KC_RSFT,
-    KC_CLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   KC_BSPC,
-    XXXXXXX,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,      KC_B,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT
+  [FUNCTIONS] = LAYOUT_ortho_3x10(
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+    KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,
+      RESET,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT
   ),
 
-  [EXTRA] = LAYOUT_ortho_3x10(
+  [STRINGS] = LAYOUT_ortho_3x10(
       KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
-    XXXXXXX,   KC_SLCK,   KC_VOLU,   KC_MUTE,    KC_F11,    KC_F12,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX,
-      RESET,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX
+    XXXXXXX,   XXXXXXX,   KC_VOLU,   KC_MUTE,    KC_F11,    KC_F12,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+    XXXXXXX,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX
   ),
 
 };
