@@ -1,11 +1,11 @@
 {
-  "keyboard_name": "Gherkin RP2040",
+  "keyboard_name": "Gherkin_RP2040",
   "manufacturer": "40 Percent Club",
   "url": "",
   "maintainer": "qmk",
   "usb": {
-    "vid": "0x4025",
-    "pid": "0x6060",
+    "vid": "0x4026",
+    "pid": "0x6061",
     "device_version": "0.0.1"
   },
   "layouts": {

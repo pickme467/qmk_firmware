@@ -161,8 +161,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [STRINGS] = LAYOUT_ortho_3x10(
       KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
-    XXXXXXX,   XXXXXXX,   KC_VOLU,   KC_MUTE,    KC_F11,    KC_F12,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX,
-    XXXXXXX,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX
+    RGB_TOG,   RGB_MOD,   KC_VOLU,   KC_MUTE,    KC_F11,    KC_F12,    MC_SU1,   RGB_HUI,   RGB_SAI,   RGB_VAI,
+    XXXXXXX,  RGB_RMOD,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   RGB_HUD,   RGB_SAD,   RGB_VAD
   ),
 
 };
