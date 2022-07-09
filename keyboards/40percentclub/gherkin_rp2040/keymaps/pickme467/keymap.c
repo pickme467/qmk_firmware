@@ -6,6 +6,7 @@ enum {
       RALTS,
       FUNCTIONS,
       STRINGS,
+      MOUSE,
 };
 
 enum {
@@ -24,6 +25,7 @@ void layer_reset(void) {
   layer_off(NUMBERS);
   layer_off(FUNCTIONS);
   layer_off(STRINGS);
+  layer_off(MOUSE);
 }
 
 void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
@@ -35,8 +37,11 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
     case 2:
       layer_on(FUNCTIONS);
       break;
-    default:
+    case 3:
       layer_on(STRINGS);
+      break;
+    default:
+      layer_on(MOUSE);
       break;
     }
   } else {
@@ -163,6 +168,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
     RGB_TOG,   RGB_MOD,   KC_VOLU,   KC_MUTE,    KC_F11,    KC_F12,    MC_SU1,   RGB_HUI,   RGB_SAI,   RGB_VAI,
     XXXXXXX,  RGB_RMOD,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   RGB_HUD,   RGB_SAD,   RGB_VAD
+  ),
+
+  [MOUSE] = LAYOUT_ortho_3x10(
+    XXXXXXX,   XXXXXXX,   KC_ACL0,   KC_BTN2,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_WH_U,
+    XXXXXXX,   XXXXXXX,   KC_ACL1,   KC_BTN1,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_MS_U,   XXXXXXX,   KC_WH_D,
+    XXXXXXX,   XXXXXXX,   KC_ACL2,   KC_BTN3,   XXXXXXX,   XXXXXXX,   KC_MS_L,   KC_MS_D,   KC_MS_R,   XXXXXXX
   ),
 
 };
