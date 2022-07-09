@@ -1,1 +1,21 @@
-# This file intentionally left blank
+# MCU name
+MCU = RP2040
+
+# Board type
+BOARD = GENERIC_RP_RP2040
+
+# Bootloader selection
+BOOTLOADER = rp2040
+
+# Build Options
+BOOTMAGIC_ENABLE = yes
+MOUSEKEY_ENABLE = yes
+EXTRAKEY_ENABLE = yes
+CONSOLE_ENABLE = no
+COMMAND_ENABLE = no
+NKRO_ENABLE = yes
+BACKLIGHT_ENABLE = no
+AUDIO_ENABLE = no
+RGBLIGHT_ENABLE = no
+RGBLIGHT_SUPPORTED = no
+AUDIO_SUPPORTED = no

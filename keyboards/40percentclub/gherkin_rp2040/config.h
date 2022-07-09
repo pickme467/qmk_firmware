@@ -15,10 +15,9 @@
 #define DIODE_DIRECTION COL2ROW
 
 /* number of backlight levels */
-#define BACKLIGHT_PIN GP28
-#ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
-#endif
+#define RGB_DI_PIN GP5
+#define DRIVER_LED_TOTAL 8
+// defined(STM32F0XX) || defined(STM32F1XX) || defined(GD32VF103) || defined(STM32F3XX) || defined(STM32F4XX) || defined(STM32L0XX)
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
@@ -36,3 +35,6 @@
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
 #endif
+
+/* Solenoid */
+#define SOLENOID_PIN GP28
