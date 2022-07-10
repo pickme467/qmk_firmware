@@ -88,7 +88,7 @@ qk_tap_dance_action_t tap_dance_actions[] =
 
 #define FN_AST LSFT(KC_8)
 
-#define RESET XXXXXXX
+#define RESET QK_BOOT
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {

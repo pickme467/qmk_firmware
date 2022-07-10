@@ -6,6 +6,7 @@ enum {
       RALTS,
       FUNCTIONS,
       STRINGS,
+      MOUSE,
 };
 
 enum {
@@ -24,6 +25,7 @@ void layer_reset(void) {
   layer_off(NUMBERS);
   layer_off(FUNCTIONS);
   layer_off(STRINGS);
+  layer_off(MOUSE);
 }
 
 void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
@@ -35,8 +37,11 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
     case 2:
       layer_on(FUNCTIONS);
       break;
-    default:
+    case 3:
       layer_on(STRINGS);
+      break;
+    default:
+      layer_on(MOUSE);
       break;
     }
   } else {
@@ -163,29 +168,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX
   ),
 
+  [MOUSE] = LAYOUT_ortho_3x10(
+    XXXXXXX,   XXXXXXX,   KC_ACL0,   KC_BTN2,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_WH_U,
+    XXXXXXX,   XXXXXXX,   KC_ACL1,   KC_BTN1,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_MS_U,   XXXXXXX,   KC_WH_D,
+    XXXXXXX,   XXXXXXX,   KC_ACL2,   KC_BTN3,   XXXXXXX,   XXXXXXX,   KC_MS_L,   KC_MS_D,   KC_MS_R,   XXXXXXX
+  ),
+
 };
-
-void keyboard_pre_init_user(void) {
-  // Call the keyboard pre init code.
-
-  // Set our LED pins as output
-  setPinOutput(D5);
-  setPinOutput(B0);
-}
-
-void led_set_user(uint8_t usb_led) {
-  if (IS_LED_ON(usb_led, USB_LED_NUM_LOCK)) {
-    writePinLow(D5);
-  } else {
-    writePinHigh(D5);
-  }
-
-  if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {
-    writePinLow(B0);
-  } else {
-    writePinHigh(B0);
-  }
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
