@@ -193,17 +193,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-
-#ifdef RGB_MATRIX_ENABLE
-led_config_t g_led_config = { {
-    {0, 1, 2, 3, 4, 5},
-    {6, 7, NO_LED, NO_LED, NO_LED, NO_LED},
-    {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
-    {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
-    {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED}
-}, {
-    {0, 0}, {15, 0}, {30, 0}, {45, 0}, {60, 0}, {75, 0}, {90, 0}, {105, 0}
-}, {
-    1, 4, 4, 4, 4, 4, 4, 4
-} };
-#endif
