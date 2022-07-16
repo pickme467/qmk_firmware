@@ -97,27 +97,48 @@ const pointing_device_driver_t pointing_device_driver = {
 // clang-format on
 
 #elif defined(POINTING_DEVICE_DRIVER_cirque_pinnacle_i2c) || defined(POINTING_DEVICE_DRIVER_cirque_pinnacle_spi)
-#    ifndef CIRQUE_PINNACLE_TAPPING_TERM
-#        include "action.h"
-#        include "action_tapping.h"
-#        define CIRQUE_PINNACLE_TAPPING_TERM GET_TAPPING_TERM(KC_BTN1, &(keyrecord_t){})
-#    endif
-#    ifndef CIRQUE_PINNACLE_TOUCH_DEBOUNCE
-#        define CIRQUE_PINNACLE_TOUCH_DEBOUNCE (CIRQUE_PINNACLE_TAPPING_TERM * 8)
+#    ifdef POINTING_DEVICE_GESTURES_CURSOR_GLIDE_ENABLE
+static bool cursor_glide_enable = true;
+
+static cursor_glide_context_t glide = {.config = {
+                                           .coef       = 102, /* Good default friction coef */
+                                           .interval   = 10,  /* 100sps */
+                                           .trigger_px = 10,  /* Default threshold in case of hover, set to 0 if you'd like */
+                                       }};
+
+void cirque_pinnacle_enable_cursor_glide(bool enable) {
+    cursor_glide_enable = enable;
+}
+
+void cirque_pinnacle_configure_cursor_glide(float trigger_px) {
+    glide.config.trigger_px = trigger_px;
+}
 #    endif
 
 report_mouse_t cirque_pinnacle_get_report(report_mouse_t mouse_report) {
     pinnacle_data_t          touchData = cirque_pinnacle_read_data();
     mouse_xy_report_t        report_x = 0, report_y = 0;
     static mouse_xy_report_t x = 0, y = 0;
-    static uint16_t          mouse_timer = 0;
-    static bool              is_z_down   = false;
+#    ifdef POINTING_DEVICE_GESTURES_CURSOR_GLIDE_ENABLE
+    cursor_glide_t           glide_report = {0};
+
+    if (cursor_glide_enable) {
+        glide_report = cursor_glide_check(&glide);
+    }
+#    endif
 
 #    if !CIRQUE_PINNACLE_POSITION_MODE
 #        error Cirque Pinnacle with relative mode not implemented yet.
 #    endif
 
     if (!touchData.valid) {
+#    ifdef POINTING_DEVICE_GESTURES_CURSOR_GLIDE_ENABLE
+        if (cursor_glide_enable && glide_report.valid) {
+            report_x = glide_report.dx;
+            report_y = glide_report.dy;
+            goto mouse_report_update;
+        }
+#    endif
         return mouse_report;
     }
 
@@ -130,45 +151,51 @@ report_mouse_t cirque_pinnacle_get_report(report_mouse_t mouse_report) {
     // Scale coordinates to arbitrary X, Y resolution
     cirque_pinnacle_scale_data(&touchData, cirque_pinnacle_get_scale(), cirque_pinnacle_get_scale());
 
-    if (x && y && touchData.xValue && touchData.yValue) {
-        report_x = (mouse_xy_report_t)(touchData.xValue - x);
-        report_y = (mouse_xy_report_t)(touchData.yValue - y);
+    if (!cirque_pinnacle_gestures(&mouse_report, touchData)) {
+        if (x && y && touchData.xValue && touchData.yValue) {
+            report_x = (mouse_xy_report_t)(touchData.xValue - x);
+            report_y = (mouse_xy_report_t)(touchData.yValue - y);
+        }
+        x = touchData.xValue;
+        y = touchData.yValue;
+
+#    ifdef POINTING_DEVICE_GESTURES_CURSOR_GLIDE_ENABLE
+        if (cursor_glide_enable) {
+            if (touchData.touchDown) {
+                cursor_glide_update(&glide, report_x, report_y, touchData.zValue);
+            } else if (!glide_report.valid) {
+                glide_report = cursor_glide_start(&glide);
+                if (glide_report.valid) {
+                    report_x = glide_report.dx;
+                    report_y = glide_report.dy;
+                }
+            }
+        }
+#    endif
     }
-    x              = touchData.xValue;
-    y              = touchData.yValue;
+
+#    ifdef POINTING_DEVICE_GESTURES_CURSOR_GLIDE_ENABLE
+mouse_report_update:
+#    endif
     mouse_report.x = report_x;
     mouse_report.y = report_y;
 
-    if (touchData.touchDown != is_z_down) {
-        is_z_down = touchData.touchDown;
-        if (!touchData.zValue) {
-            if (timer_elapsed(mouse_timer) < CIRQUE_PINNACLE_TAPPING_TERM && mouse_timer != 0) {
-                mouse_report.buttons = pointing_device_handle_buttons(mouse_report.buttons, true, POINTING_DEVICE_BUTTON1);
-                pointing_device_set_report(mouse_report);
-                pointing_device_send();
-#    if TAP_CODE_DELAY > 0
-                wait_ms(TAP_CODE_DELAY);
-#    endif
-                mouse_report.buttons = pointing_device_handle_buttons(mouse_report.buttons, false, POINTING_DEVICE_BUTTON1);
-                pointing_device_set_report(mouse_report);
-                pointing_device_send();
-            }
-        }
-        mouse_timer = timer_read();
-    }
-    if (timer_elapsed(mouse_timer) > (CIRQUE_PINNACLE_TOUCH_DEBOUNCE)) {
-        mouse_timer = 0;
-    }
-
     return mouse_report;
+}
+
+uint16_t cirque_pinnacle_get_cpi(void) {
+    return CIRQUE_PINNACLE_PX_TO_INCH(cirque_pinnacle_get_scale());
+}
+void cirque_pinnacle_set_cpi(uint16_t cpi) {
+    cirque_pinnacle_set_scale(CIRQUE_PINNACLE_INCH_TO_PX(cpi));
 }
 
 // clang-format off
 const pointing_device_driver_t pointing_device_driver = {
     .init       = cirque_pinnacle_init,
     .get_report = cirque_pinnacle_get_report,
-    .set_cpi    = cirque_pinnacle_set_scale,
-    .get_cpi    = cirque_pinnacle_get_scale
+    .set_cpi    = cirque_pinnacle_set_cpi,
+    .get_cpi    = cirque_pinnacle_get_cpi
 };
 // clang-format on
 
@@ -230,81 +257,48 @@ const pointing_device_driver_t pointing_device_driver = {
 };
 // clang-format on
 
-#elif defined(POINTING_DEVICE_DRIVER_pmw3360)
-static void pmw3360_device_init(void) {
-    pmw3360_init(0);
+#elif defined(POINTING_DEVICE_DRIVER_pmw3360) || defined(POINTING_DEVICE_DRIVER_pmw3389)
+static void pmw33xx_init_wrapper(void) {
+    pmw33xx_init(0);
 }
 
-report_mouse_t pmw3360_get_report(report_mouse_t mouse_report) {
-    report_pmw3360_t data        = pmw3360_read_burst(0);
-    static uint16_t  MotionStart = 0; // Timer for accel, 0 is resting state
+static void pmw33xx_set_cpi_wrapper(uint16_t cpi) {
+    pmw33xx_set_cpi(0, cpi);
+}
 
-    if (data.isOnSurface && data.isMotion) {
-        // Reset timer if stopped moving
-        if (!data.isMotion) {
-            if (MotionStart != 0) MotionStart = 0;
-            return mouse_report;
-        }
+static uint16_t pmw33xx_get_cpi_wrapper(void) {
+    return pmw33xx_get_cpi(0);
+}
 
-        // Set timer if new motion
-        if ((MotionStart == 0) && data.isMotion) {
-#    ifdef CONSOLE_ENABLE
-            if (debug_mouse) dprintf("Starting motion.\n");
-#    endif
-            MotionStart = timer_read();
-        }
-        mouse_report.x = CONSTRAIN_HID_XY(data.dx);
-        mouse_report.y = CONSTRAIN_HID_XY(data.dy);
+report_mouse_t pmw33xx_get_report(report_mouse_t mouse_report) {
+    pmw33xx_report_t report    = pmw33xx_read_burst(0);
+    static bool      in_motion = false;
+
+    if (report.motion.b.is_lifted) {
+        return mouse_report;
     }
 
+    if (!report.motion.b.is_motion) {
+        in_motion = false;
+        return mouse_report;
+    }
+
+    if (!in_motion) {
+        in_motion = true;
+        dprintf("PWM3360 (0): starting motion\n");
+    }
+
+    mouse_report.x = CONSTRAIN_HID_XY(report.delta_x);
+    mouse_report.y = CONSTRAIN_HID_XY(report.delta_y);
     return mouse_report;
 }
 
 // clang-format off
 const pointing_device_driver_t pointing_device_driver = {
-    .init       = pmw3360_device_init,
-    .get_report = pmw3360_get_report,
-    .set_cpi    = pmw3360_set_cpi,
-    .get_cpi    = pmw3360_get_cpi
-};
-// clang-format on
-
-#elif defined(POINTING_DEVICE_DRIVER_pmw3389)
-static void pmw3389_device_init(void) {
-    pmw3389_init();
-}
-
-report_mouse_t pmw3389_get_report(report_mouse_t mouse_report) {
-    report_pmw3389_t data        = pmw3389_read_burst();
-    static uint16_t  MotionStart = 0; // Timer for accel, 0 is resting state
-
-    if (data.isOnSurface && data.isMotion) {
-        // Reset timer if stopped moving
-        if (!data.isMotion) {
-            if (MotionStart != 0) MotionStart = 0;
-            return mouse_report;
-        }
-
-        // Set timer if new motion
-        if ((MotionStart == 0) && data.isMotion) {
-#    ifdef CONSOLE_ENABLE
-            if (debug_mouse) dprintf("Starting motion.\n");
-#    endif
-            MotionStart = timer_read();
-        }
-        mouse_report.x = CONSTRAIN_HID_XY(data.dx);
-        mouse_report.y = CONSTRAIN_HID_XY(data.dy);
-    }
-
-    return mouse_report;
-}
-
-// clang-format off
-const pointing_device_driver_t pointing_device_driver = {
-    .init       = pmw3389_device_init,
-    .get_report = pmw3389_get_report,
-    .set_cpi    = pmw3389_set_cpi,
-    .get_cpi    = pmw3389_get_cpi
+    .init       = pmw33xx_init_wrapper,
+    .get_report = pmw33xx_get_report,
+    .set_cpi    = pmw33xx_set_cpi_wrapper,
+    .get_cpi    = pmw33xx_get_cpi_wrapper
 };
 // clang-format on
 
