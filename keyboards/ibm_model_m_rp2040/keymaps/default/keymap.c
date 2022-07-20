@@ -10,7 +10,7 @@ enum layer_names {
   EXTENDED,
 };
 
-#define FN_NLCK LT(EXTENDED, KC_NLCK)
+#define FN_NLCK LT(EXTENDED, KC_NUM)
 #define FN_CLCK LT(EXTENDED, KC_CLCK)
 #define RESET QK_BOOT
 
