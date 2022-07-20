@@ -27,23 +27,22 @@
  * represents the switch matrix.
  */
 
-
 #define LAYOUT_terminal( \
     k_esc,       k_f1, k_f2, k_f3, k_f4,    k_f5, k_f6, k_f7, k_f8,    k_f9, k_f10, k_f11, k_f12,            k_prscr, k_scrl, k_pause, \
     k_tild, k_1, k_2, k_3, k_4, k_5, k_6, k_7, k_8, k_9, k_0, k_minus, k_equals,               k_backspace,  k_ins,   k_home, k_pgup,     kp_nl,       kp_div, kp_mult, kp_minus,        \
-    k_tab,     k_q, k_w, k_e, k_r, k_t, k_y, k_u, k_i, k_o, k_p, k_squarebrop, k_squarebrcl, k_return,       k_del,   k_end,  k_pgdn,     kp_7,        kp_8,   kp_9,    kp_plus,         \
+    k_tab,     k_q, k_w, k_e, k_r, k_t, k_y, k_u, k_i, k_o, k_p, k_squarebrop, k_squarebrcl, k_return,       k_del,   k_end,  k_pgdn,     kp_7,        kp_8,   kp_9,    kp_plus, \
     k_caps,       k_a, k_s, k_d, k_f, k_g, k_h, k_j, k_k, k_l, k_semicolon, k_singlequote,        k_backsl,                               kp_4,        kp_5,   kp_6,    kp_plus_hidden,  \
     k_lshift,k_nubs,k_z, k_x, k_c, k_v, k_b, k_n, k_m, k_cm,k_period, k_fwslash,                  k_rshift,           k_up,               kp_1,        kp_2,   kp_3,    kp_enter,        \
     k_lctrl,         k_lalt,                              k_space,                    k_ralt,      k_rctrl,  k_left,  k_down, k_right,    kp_0,      kp_dot                              \
 ) \
 { \
-    /*        0       1      2      3                4         5              6             7         8            9         A         B               C                D        E      F       */ \
+    /*        0       1      2      3                4         5              6             7         8            9         A         B               C                D        E      F     */ \
     /* 0 */ { k_esc,  k_g,   k_h,   k_f6,            KC_NO,    k_singlequote, k_f5,         KC_NO,    KC_NO,       kp_0,     kp_dot,   k_up,           k_lalt,          KC_NO,   k_f4,  k_nubs  }, \
     /* 1 */ { k_tab,  k_t,   k_y,   k_squarebrcl,    k_f7,     k_squarebrop,  k_backspace,  k_lshift, kp_4,        kp_5,     kp_6,     kp_plus_hidden, KC_NO,           KC_NO,   k_f3,  k_caps  }, \
     /* 2 */ { k_tild, k_5,   k_6,   k_equals,        k_f8,     k_minus,       k_f9,         KC_NO,    k_del,       k_ins,    k_pgup,   k_home,         KC_NO,           k_lctrl, k_f2,  k_f1    }, \
     /* 3 */ { k_1,    k_4,   k_7,   k_8,             k_9,      k_0,           k_f10,        KC_NO,    k_f11,       k_f12,    k_pgdn,   k_end,          k_prscr,         KC_NO,   k_3,   k_2     }, \
     /* 4 */ { k_q,    k_r,   k_u,   k_i,             k_o,      k_p,           KC_NO,        KC_NO,    kp_7,        kp_8,     kp_9,     kp_plus,        k_scrl,          KC_NO,   k_e,   k_w     }, \
-    /* 5 */ { k_a,    k_f,   k_j,   k_k,             k_l,      k_semicolon,   k_backsl,     KC_NO,    kp_1,        kp_2,     kp_3,     kp_enter,       KC_NO,           KC_NO,   k_d,   k_s     }, \
-    /* 6 */ { k_z,    k_v,   k_m,   k_cm,            k_period, KC_NO,         k_return,     k_rshift, kp_nl,       kp_div,   kp_mult,  k_pause,        KC_NO,           k_rctrl, k_c,   k_x     }, \
-    /* 7 */ { KC_NO,  k_b,   k_n,   KC_NO,           KC_NO,    k_fwslash,     k_space,      KC_NO,    k_down,      k_right,  kp_minus, k_left,         k_ralt,          KC_NO,   KC_NO, KC_NO   }  \
+    /* 5 */ { k_a,    k_f,   k_j,   k_k,             k_l,      k_semicolon,   KC_NO,        KC_NO,    kp_1,        kp_2,     kp_3,     kp_enter,       KC_NO,           KC_NO,   k_d,   k_s     }, \
+    /* 6 */ { k_z,    k_v,   k_m,   k_cm,            k_period, k_backsl,      k_return,     k_rshift, kp_nl,       kp_div,   kp_mult,  k_pause,        KC_NO,           k_rctrl, k_c,   k_x     }, \
+    /* 7 */ { KC_NO,  k_b,   k_n,   KC_NO,           KC_NO,    k_fwslash,     k_space,      KC_NO,    k_down,      k_right,  kp_minus, k_left,         k_ralt,          KC_NO,   KC_NO, KC_NO   } \
 }
