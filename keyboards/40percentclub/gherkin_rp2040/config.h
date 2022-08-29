@@ -9,7 +9,6 @@
 /* key matrix pins */
 #define MATRIX_COL_PINS { GP12, GP11, GP10, GP9, GP26, GP14 }
 #define MATRIX_ROW_PINS { GP1, GP2, GP3, GP4, GP6 }
-#define UNUSED_PINS
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
