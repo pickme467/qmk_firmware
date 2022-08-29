@@ -111,33 +111,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
-bool get_permissive_hold(uint16_t keycode, keyrecord_t* record) {
-	switch (keycode) {
-	case FN_J:
-		return true;
-	default:
-		return false;
-	}
-}
-
-bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
-	switch (keycode) {
-	case FN_J:
-		return true;
-	default:
-		return false;
-	}
-}
-
-bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
-	switch (keycode) {
-	case FN_J:
-		return true;
-	default:
-		return false;
-	}
-}
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [BASE] = LAYOUT_ortho_3x10(
