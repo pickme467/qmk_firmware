@@ -27,3 +27,4 @@
 
 /* Solenoid */
 #define SOLENOID_PIN GP28
+#define SOLENOID_DEFAULT_DWELL 1

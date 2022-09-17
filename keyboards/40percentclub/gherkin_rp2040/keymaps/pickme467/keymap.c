@@ -47,6 +47,7 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
   } else {
     layer_reset();
     if (state->count == 1) {
+      haptic_play();
       register_code(KC_X);
       unregister_code(KC_X);
     }
@@ -164,5 +165,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     }
   }
+  return true;
+}
+
+bool get_haptic_enabled_key(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case FN_X:
+    if (record->event.pressed) return false;
+    break;
+  case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+    if (record->tap.count == 0) return false;
+    break;
+  case QK_LAYER_TAP_TOGGLE ... QK_LAYER_TAP_TOGGLE_MAX:
+    if (record->tap.count != TAPPING_TOGGLE) return false;
+    break;
+  case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+    if (record->tap.count == 0) return false;
+    break;
+  case KC_LEFT_CTRL ... KC_RIGHT_GUI:
+  case QK_MOMENTARY ... QK_MOMENTARY_MAX:
+  case QK_LAYER_MOD ... QK_LAYER_MOD_MAX:
+    return false;
+  }
+
   return true;
 }
