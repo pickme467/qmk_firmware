@@ -46,11 +46,6 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
     }
   } else {
     layer_reset();
-    if (state->count == 1) {
-      haptic_play();
-      register_code(KC_X);
-      unregister_code(KC_X);
-    }
   }
 }
 
@@ -133,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
-    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+    HPT_TOG,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
     KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,
       RESET,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT
   ),
@@ -189,4 +184,8 @@ bool get_haptic_enabled_key(uint16_t keycode, keyrecord_t *record) {
   }
 
   return true;
+}
+
+void keyboard_post_init_user(void) {
+  haptic_disable();
 }

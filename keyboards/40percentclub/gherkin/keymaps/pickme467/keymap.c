@@ -46,10 +46,6 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
     }
   } else {
     layer_reset();
-    if (state->count == 1) {
-      register_code(KC_X);
-      unregister_code(KC_X);
-    }
   }
 }
 
