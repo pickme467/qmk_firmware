@@ -60,8 +60,11 @@ void ctrl_upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
   case 2:
     layer_on(NUMBERS);
     break;
-  default:
+  case 3:
     layer_on(FUNCTIONS);
+    break;
+  default:
+    layer_on(STRINGS);
     break;
   }
 }
@@ -73,8 +76,11 @@ void ctrl_upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
   case 2:
     layer_off(NUMBERS);
     break;
-  default:
+  case 3:
     layer_off(FUNCTIONS);
+    break;
+  default:
+    layer_off(STRINGS);
     break;
   }
   unregister_code(KC_LCTL);
