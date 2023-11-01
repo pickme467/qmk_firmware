@@ -2,6 +2,7 @@
 
 enum {
       BASE = 0,
+      GAME,
       NUMBERS,
       RALTS,
       FUNCTIONS,
@@ -69,6 +70,8 @@ qk_tap_dance_action_t tap_dance_actions[] =
 
 #define FN_J LT(RALTS, KC_J)
 #define FN_X TD(UPPER_LOWER_MOD)
+#define FN_GAME DF(GAME)
+#define FN_BASE DF(BASE)
 
 #define FNRA_A RALT(KC_A)
 #define FNRA_C RALT(KC_C)
@@ -128,8 +131,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
-    HPT_TOG,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
-    KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,
+    HPT_TOG,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   FN_GAME,
+    KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   FN_BASE,
       RESET,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT
   ),
 
@@ -143,6 +146,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,   XXXXXXX,   KC_ACL0,   KC_BTN2,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_WH_U,
     XXXXXXX,   XXXXXXX,   KC_ACL1,   KC_BTN1,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_MS_U,   XXXXXXX,   KC_WH_D,
     XXXXXXX,   XXXXXXX,   KC_ACL2,   KC_BTN3,   XXXXXXX,   XXXXXXX,   KC_MS_L,   KC_MS_D,   KC_MS_R,   XXXXXXX
+  ),
+
+  [GAME] = LAYOUT_ortho_3x10(
+    KC_QUOT,   KC_COMM,    KC_DOT,      KC_P,      KC_Y,      KC_F,      KC_G,      KC_C,      KC_R,      KC_L,
+       KC_A,      KC_O,      KC_E,      KC_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
+    KC_SCLN,      KC_Q,      KC_J,      KC_K,      FN_X,    KC_SPC,      KC_M,      KC_W,      KC_V,      KC_Z
   ),
 
 };
