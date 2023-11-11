@@ -3,7 +3,9 @@
 enum {
       BASE = 0,
       GAME,
+      QWERTY,
       NUMBERS,
+      NUMBERS_QWERTY,
       RALTS,
       FUNCTIONS,
       STRINGS,
@@ -12,6 +14,7 @@ enum {
 
 enum {
       UPPER_LOWER_MOD = 0,
+      UPPER_LOWER_MOD_QWERTY,
 };
 
 enum custom_keycodes {
@@ -24,6 +27,7 @@ enum custom_keycodes {
 
 void layer_reset(void) {
   layer_off(NUMBERS);
+  layer_off(NUMBERS_QWERTY);
   layer_off(FUNCTIONS);
   layer_off(STRINGS);
   layer_off(MOUSE);
@@ -50,6 +54,27 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
+void upper_lower_function_qwerty(qk_tap_dance_state_t* state, void* user_data) {
+  if (state->pressed) {
+    switch (state->count) {
+    case 1:
+      layer_on(NUMBERS_QWERTY);
+      break;
+    case 2:
+      layer_on(FUNCTIONS);
+      break;
+    case 3:
+      layer_on(STRINGS);
+      break;
+    default:
+      layer_on(MOUSE);
+      break;
+    }
+  } else {
+    layer_reset();
+  }
+}
+
 void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
   layer_reset();
 }
@@ -57,6 +82,7 @@ void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
 qk_tap_dance_action_t tap_dance_actions[] =
   {
    [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, upper_lower_function, upper_lower_reset),
+   [UPPER_LOWER_MOD_QWERTY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, upper_lower_function_qwerty, upper_lower_reset),
   };
 
 #define FN_QUOT MT(MOD_LSFT, KC_QUOT)
@@ -70,7 +96,9 @@ qk_tap_dance_action_t tap_dance_actions[] =
 
 #define FN_J LT(RALTS, KC_J)
 #define FN_X TD(UPPER_LOWER_MOD)
+#define FN_B TD(UPPER_LOWER_MOD_QWERTY)
 #define FN_GAME DF(GAME)
+#define FN_QWERTY DF(QWERTY)
 #define FN_BASE DF(BASE)
 
 #define FNRA_A RALT(KC_A)
@@ -102,6 +130,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     return TAPPING_TERM * 12 / 10;
     // TAP DANCE
   case FN_X:
+  case FN_B:
     return 275;
   default:
     return TAPPING_TERM;
@@ -122,6 +151,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,      KC_B,      KC_7,      KC_8,      KC_9,    KC_ENT
   ),
 
+  [NUMBERS_QWERTY] = LAYOUT_ortho_3x10(
+    KC_BSLS,   KC_COMM,    KC_DOT,   KC_PIPE,    FN_AST,   KC_QUES,      KC_1,      KC_2,      KC_3,      KC_0,
+     KC_TAB,    KC_EQL,   KC_PLUS,   KC_UNDS,   KC_MINS,   KC_SLSH,      KC_4,      KC_5,      KC_6,   KC_BSPC,
+     KC_ESC,   XXXXXXX,   XXXXXXX,      KC_B,   XXXXXXX,      KC_N,      KC_7,      KC_8,      KC_9,    KC_ENT
+  ),
+
   [RALTS] = LAYOUT_ortho_3x10(
   KC_INSERT,    KC_GRV,   KC_TILD,   KC_LBRC,     KC_LT,     KC_GT,   KC_RBRC,    FNRA_C,    XXXXXXX,    FNRA_L,
      FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,   KC_LCBR,   KC_RCBR,   KC_RPRN,     KC_UP,     FNRA_N,    FNRA_S,
@@ -129,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
-    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   FN_GAME,
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, FN_QWERTY,   FN_GAME,
     KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   FN_BASE,
       RESET,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT
   ),
@@ -150,6 +185,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_QUOT,   KC_COMM,    KC_DOT,      KC_P,      KC_Y,      KC_F,      KC_G,      KC_C,      KC_R,      KC_L,
        KC_A,      KC_O,      KC_E,      KC_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
     KC_SCLN,      KC_Q,      KC_J,      KC_K,      FN_X,    KC_SPC,      KC_M,      KC_W,      KC_V,      KC_Z
+  ),
+
+  [QWERTY] = LAYOUT_ortho_3x10(
+       KC_Q,      KC_W,     KC_E,       KC_R,      KC_T,      KC_Y,      KC_U,      KC_I,      KC_O,      KC_P,
+       KC_A,      KC_S,     KC_D,       KC_F,      KC_G,      KC_H,      KC_J,      KC_K,      KC_L,   KC_SCLN,
+       KC_Z,      KC_X,     KC_C,       KC_V,      FN_B,    KC_SPC,      KC_M,    KC_COMM,    KC_DOT, KC_SLASH
   ),
 
 };
