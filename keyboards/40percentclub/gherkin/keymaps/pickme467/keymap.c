@@ -85,6 +85,15 @@ tap_dance_action_t tap_dance_actions[] =
    [UPPER_LOWER_MOD_QWERTY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, upper_lower_function_qwerty, upper_lower_reset),
   };
 
+
+const uint16_t PROGMEM shift_l_combo[] = {KC_QUOT, KC_COMM, COMBO_END};
+const uint16_t PROGMEM shift_r_combo[] = {KC_R, KC_L, COMBO_END};
+
+combo_t key_combos[] = {
+  COMBO(shift_l_combo, MOD_LSFT),
+  COMBO(shift_r_combo, MOD_RSFT)
+};
+
 #define FN_QUOT MT(MOD_LSFT, KC_QUOT)
 #define FN_COMM MT(MOD_LCTL, KC_COMM)
 #define FN_DOT MT(MOD_LALT, KC_DOT)
@@ -140,7 +149,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [BASE] = LAYOUT_ortho_3x10(
-    FN_QUOT,   FN_COMM,    FN_DOT,      FN_P,      KC_Y,      KC_F,      FN_G,      FN_C,      FN_R,      FN_L,
+    KC_QUOT,   KC_COMM,    FN_DOT,      FN_P,      KC_Y,      KC_F,      FN_G,      FN_C,      KC_R,      KC_L,
        KC_A,      KC_O,      KC_E,      KC_U,      KC_I,      KC_D,      KC_H,      KC_T,      KC_N,      KC_S,
     KC_SCLN,      KC_Q,      FN_J,      KC_K,      FN_X,    KC_SPC,      KC_M,      KC_W,      KC_V,      KC_Z
   ),
