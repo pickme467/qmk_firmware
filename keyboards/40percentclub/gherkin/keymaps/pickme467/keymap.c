@@ -33,7 +33,7 @@ void layer_reset(void) {
   layer_off(MOUSE);
 }
 
-void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
+void upper_lower_function(tap_dance_state_t* state, void* user_data) {
   if (state->pressed) {
     switch (state->count) {
     case 1:
@@ -54,7 +54,7 @@ void upper_lower_function(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void upper_lower_function_qwerty(qk_tap_dance_state_t* state, void* user_data) {
+void upper_lower_function_qwerty(tap_dance_state_t* state, void* user_data) {
   if (state->pressed) {
     switch (state->count) {
     case 1:
@@ -75,11 +75,11 @@ void upper_lower_function_qwerty(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
+void upper_lower_reset(tap_dance_state_t* state, void* user_data) {
   layer_reset();
 }
 
-qk_tap_dance_action_t tap_dance_actions[] =
+tap_dance_action_t tap_dance_actions[] =
   {
    [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, upper_lower_function, upper_lower_reset),
    [UPPER_LOWER_MOD_QWERTY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, upper_lower_function_qwerty, upper_lower_reset),
@@ -165,8 +165,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
     XXXXXXX,   KC_LCTL,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, FN_QWERTY,   FN_GAME,
-    KC_CLCK,   KC_SLCK,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   FN_BASE,
-      RESET,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT
+    KC_CAPS,   KC_SCRL,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   FN_BASE,
+    QK_BOOT,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME,   KC_PGDN,    KC_END,    KC_ENT
   ),
 
   [STRINGS] = LAYOUT_ortho_3x10(
