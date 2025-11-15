@@ -8,8 +8,8 @@ enum {
       NUMBERS_QWERTY,
       RALTS,
       FUNCTIONS,
-      STRINGS,
       MOUSE,
+      SERVICE,
 };
 
 enum {
@@ -29,8 +29,8 @@ void layer_reset(void) {
   layer_off(NUMBERS);
   layer_off(NUMBERS_QWERTY);
   layer_off(FUNCTIONS);
-  layer_off(STRINGS);
   layer_off(MOUSE);
+  layer_off(SERVICE);
 }
 
 void upper_lower_function(tap_dance_state_t* state, void* user_data) {
@@ -43,10 +43,10 @@ void upper_lower_function(tap_dance_state_t* state, void* user_data) {
       layer_on(FUNCTIONS);
       break;
     case 3:
-      layer_on(STRINGS);
+      layer_on(MOUSE);
       break;
     default:
-      layer_on(MOUSE);
+      layer_on(SERVICE);
       break;
     }
   } else {
@@ -64,10 +64,10 @@ void upper_lower_function_qwerty(tap_dance_state_t* state, void* user_data) {
       layer_on(FUNCTIONS);
       break;
     case 3:
-      layer_on(STRINGS);
+      layer_on(MOUSE);
       break;
     default:
-      layer_on(MOUSE);
+      layer_on(SERVICE);
       break;
     }
   } else {
@@ -164,15 +164,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FUNCTIONS] = LAYOUT_ortho_3x10(
-    XXXXXXX,   KC_LCTL,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, FN_QWERTY,   FN_GAME,
-    KC_CAPS,   KC_SCRL,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   FN_BASE,
-    QK_BOOT,   XXXXXXX,   XXXXXXX,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME,   KC_PGDN,    KC_END,    KC_ENT
+      KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
+    KC_CAPS,   KC_SCRL,   KC_VOLU,   KC_MUTE,    KC_F11,    KC_F12,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,
+    QK_BOOT,   XXXXXXX,   KC_VOLD,      KC_X,   XXXXXXX,   XXXXXXX,   KC_HOME,   KC_PGDN,    KC_END,    KC_ENT
   ),
 
-  [STRINGS] = LAYOUT_ortho_3x10(
-      KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
-    XXXXXXX,   XXXXXXX,   KC_VOLU,   KC_MUTE,    KC_F11,    KC_F12,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX,
-    XXXXXXX,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX
+  [SERVICE] = LAYOUT_ortho_3x10(
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, FN_QWERTY,   FN_GAME,
+    XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   FN_BASE,
+    QK_BOOT,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX
   ),
 
   [MOUSE] = LAYOUT_ortho_3x10(

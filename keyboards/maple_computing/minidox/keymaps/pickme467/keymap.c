@@ -5,7 +5,6 @@ enum {
   NUMBERS,
   RALTS,
   FUNCTIONS,
-  STRINGS,
 };
 
 enum {
@@ -16,11 +15,6 @@ enum {
   CTRL_UPPER_LOWER_MOD,
 };
 
-enum custom_keycodes {
-      MC_SU1 = SAFE_RANGE,
-      MC_ROOT,
-};
-
 #define xstr(s) str(s)
 #define str(s) #s
 
@@ -29,11 +23,8 @@ void upper_lower_finish(tap_dance_state_t* state, void* user_data) {
   case 1:
     layer_on(NUMBERS);
     break;
-  case 2:
-    layer_on(FUNCTIONS);
-    break;
   default:
-    layer_on(STRINGS);
+    layer_on(FUNCTIONS);
     break;
   }
 }
@@ -43,11 +34,8 @@ void upper_lower_reset(tap_dance_state_t* state, void* user_data) {
   case 1:
     layer_off(NUMBERS);
     break;
-  case 2:
-    layer_off(FUNCTIONS);
-    break;
   default:
-    layer_off(STRINGS);
+    layer_off(FUNCTIONS);
     break;
   }
 }
@@ -60,11 +48,8 @@ void ctrl_upper_lower_finish(tap_dance_state_t* state, void* user_data) {
   case 2:
     layer_on(NUMBERS);
     break;
-  case 3:
-    layer_on(FUNCTIONS);
-    break;
   default:
-    layer_on(STRINGS);
+    layer_on(FUNCTIONS);
     break;
   }
 }
@@ -76,11 +61,8 @@ void ctrl_upper_lower_reset(tap_dance_state_t* state, void* user_data) {
   case 2:
     layer_off(NUMBERS);
     break;
-  case 3:
-    layer_off(FUNCTIONS);
-    break;
   default:
-    layer_off(STRINGS);
+    layer_off(FUNCTIONS);
     break;
   }
   unregister_code(KC_LCTL);
@@ -233,9 +215,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FUNCTIONS] = LAYOUT( \
-      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
-      KC_CAPS,   KC_SCRL,   XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,\
-      QK_BOOT,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   KC_HOME,   KC_PGDN,    KC_END,    KC_ENT,\
+        KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,           KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,\
+      KC_CAPS,   KC_SCRL,   KC_VOLU,   KC_MUTE,    KC_F11,          KC_F12,   XXXXXXX,   KC_PGUP,   XXXXXXX,   XXXXXXX,\
+      QK_BOOT,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,         XXXXXXX,   KC_HOME,   KC_PGDN,    KC_END,    KC_ENT,\
                             XXXXXXX,   XXXXXXX,   XXXXXXX,         TD_LALT,    KC_SPC,   TD_RSFT\
   ),
 
@@ -244,28 +226,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        FNRA_A,    FNRA_O,    FNRA_E,   KC_LPRN,   KC_LCBR,         KC_RCBR,   KC_RPRN,     KC_UP,    FNRA_N,    FNRA_S,\
     KC_DELETE,     SUPER,   KC_LSFT,     HYPER,    FNRA_X,         XXXXXXX,   KC_LEFT,   KC_DOWN,  KC_RIGHT,    FNRA_Z,\
                             XXXXXXX,   XXXXXXX,   XXXXXXX,         TD_LALT,    KC_SPC,   TD_RSFT\
-  ),
-
-  [STRINGS] = LAYOUT( \
-        KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,           KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,\
-    XXXXXXX,   XXXXXXX,   KC_VOLU,     KC_MUTE,    KC_F11,          KC_F12,    MC_SU1,   XXXXXXX,   XXXXXXX,   XXXXXXX, \
-    XXXXXXX,   XXXXXXX,   KC_VOLD,     XXXXXXX,   XXXXXXX,         XXXXXXX,   MC_ROOT,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
-                            XXXXXXX,   XXXXXXX,   XXXXXXX,         XXXXXXX,   XXXXXXX,   XXXXXXX\
   )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    switch (keycode) {
-    case MC_SU1:
-      SEND_STRING(xstr(D_SU1)SS_TAP(X_ENT));
-      break;
-    case MC_ROOT:
-      SEND_STRING(xstr(D_ROOT)SS_TAP(X_ENT));
-      break;
-    default:
-      break;
-    }
-  }
   return true;
 }

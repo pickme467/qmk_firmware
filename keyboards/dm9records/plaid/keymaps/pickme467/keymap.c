@@ -19,7 +19,7 @@ enum {
 #define xstr(s) str(s)
 #define str(s) #s
 
-void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
+void upper_lower_finish(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     layer_on(NUMBERS);
@@ -30,7 +30,7 @@ void upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
+void upper_lower_reset(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     layer_off(NUMBERS);
@@ -41,7 +41,7 @@ void upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void ctrl_upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
+void ctrl_upper_lower_finish(tap_dance_state_t* state, void* user_data) {
   register_code(KC_LCTL);
   switch (state->count) {
   case 1:
@@ -55,7 +55,7 @@ void ctrl_upper_lower_finish(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void ctrl_upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
+void ctrl_upper_lower_reset(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     break;
@@ -69,7 +69,7 @@ void ctrl_upper_lower_reset(qk_tap_dance_state_t* state, void* user_data) {
   unregister_code(KC_LCTL);
 }
 
-void ralt_ctrl_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
+void ralt_ctrl_gui_finish(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     layer_on(RALTS);
@@ -84,7 +84,7 @@ void ralt_ctrl_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void ralt_ctrl_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
+void ralt_ctrl_gui_reset(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     layer_off(RALTS);
@@ -99,7 +99,7 @@ void ralt_ctrl_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void lalt_shift_finish(qk_tap_dance_state_t* state, void* user_data) {
+void lalt_shift_finish(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     register_code(KC_LALT);
@@ -115,7 +115,7 @@ void lalt_shift_finish(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void lalt_shift_reset(qk_tap_dance_state_t* state, void* user_data) {
+void lalt_shift_reset(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     unregister_code(KC_LALT);
@@ -131,7 +131,7 @@ void lalt_shift_reset(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void shift_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
+void shift_gui_finish(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     register_code(KC_RSFT);
@@ -151,7 +151,7 @@ void shift_gui_finish(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-void shift_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
+void shift_gui_reset(tap_dance_state_t* state, void* user_data) {
   switch (state->count) {
   case 1:
     unregister_code(KC_RSFT);
@@ -171,7 +171,7 @@ void shift_gui_reset(qk_tap_dance_state_t* state, void* user_data) {
   }
 }
 
-qk_tap_dance_action_t tap_dance_actions[] =
+tap_dance_action_t tap_dance_actions[] =
   {
     [UPPER_LOWER_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, upper_lower_finish, upper_lower_reset),
     [RALT_GUI_MOD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ralt_ctrl_gui_finish, ralt_ctrl_gui_reset),
@@ -218,8 +218,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [FUNCTIONS] = LAYOUT_plaid_grid(
       KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,   XXXXXXX,   XXXXXXX,     KC_F6,     KC_F7,     KC_F8,     KC_F9,    KC_F10,
-    KC_CLCK,   KC_SLCK,   KC_VOLU,   KC_MUTE,    KC_F11,   XXXXXXX,   XXXXXXX,    KC_F12,   XXXXXXX,   KC_PGUP, FN_QWERTY,   FN_BASE,
-      RESET,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_HOME, KC_PGDOWN,    KC_END,    KC_ENT,
+    KC_CAPS,   KC_SCRL,   KC_VOLU,   KC_MUTE,    KC_F11,   XXXXXXX,   XXXXXXX,    KC_F12,   XXXXXXX,   KC_PGUP, FN_QWERTY,   FN_BASE,
+    QK_BOOT,   XXXXXXX,   KC_VOLD,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_HOME,   KC_PGDN,    KC_END,    KC_ENT,
     XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   TD_LALT,    KC_SPC,   TD_RSFT,   XXXXXXX,   XXXXXXX
   ),
 
